@@ -46,7 +46,7 @@ app.get("/github/gotauth", function(req, res) {
         github_token.get(oauth_data, code).then(function(token) {
             console.log("Retrieved token: " + token);
             res.cookie("github_token", token)
-                .send("Authorized");
+                .redirect("/");
         },
         function(error_msg) {
             console.error("Token retrieval failed: " + error_msg);
