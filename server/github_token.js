@@ -4,10 +4,10 @@ var request = require("request"),
     querystring = require("querystring"),
     Promise = require("node-promise").Promise;
 
-exports.get = function(oauth_ids, auth_code) {
+exports.get = function(oauth_config, auth_code) {
     var token_params = {
-            client_id: oauth_ids.client_id,
-            client_secret: oauth_ids.client_secret,
+            client_id: oauth_config.client_id,
+            client_secret: oauth_config.client_secret,
             code: auth_code
         },
         get_token_url = "https://github.com/login/oauth/access_token?" +

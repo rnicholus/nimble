@@ -24,7 +24,7 @@ function check_valid_state(state) {
 app.get("/github/getauth", function(req, res) {
     var auth_params = {
             client_id: oauth_data.client_id,
-            scope: "repo",
+            scope: oauth_data.scope,
             state: uuid.v1()
         },
         auth_url = "https://github.com/login/oauth/authorize?" +
