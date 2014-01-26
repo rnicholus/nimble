@@ -1,1 +1,19 @@
-<a href="/github/getauth">login to github</a>
+<!DOCTYPE html>
+<html>
+    <body>
+        <a id="login_link" href="/github/getauth" style="display:none">login to github</a>
+        <script>
+            if (document.cookie.indexOf("github_token") < 0) {
+                document.getElementById("login_link").style.display = "";
+            }
+            else {
+                (function() {
+                    var authorizedEl = document.createElement("div");
+
+                    authorizedEl.innerHTML = "Authorized";
+                    document.body.insertBefore(authorizedEl, null);
+                }())
+            }
+        </script>
+    </body>
+</html>
