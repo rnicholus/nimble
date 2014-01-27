@@ -7,5 +7,5 @@
       "node-promise": "0.5.10",
       "request": "2.33.0"
   },
-  "version" : "0.0.1"
+  "version" : "0.1.0"
 }
