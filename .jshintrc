@@ -41,5 +41,5 @@
     "shadow": false,
     "sub": true,
     "supernew": false,
-    "predef": ["Ember", "DS"]
+    "predef": ["Ember", "DS", "Nimble", "document"]
 }

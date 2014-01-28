@@ -1,0 +1,2 @@
+Nimble.Router.map(function() {
+});

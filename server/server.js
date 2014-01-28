@@ -21,7 +21,7 @@ function check_valid_state(state) {
     return false;
 }
 
-app.get("/github/getauth", function(req, res) {
+app.get("/github/token", function(req, res) {
     var auth_params = {
             client_id: oauth_data.client_id,
             scope: oauth_data.scope,
