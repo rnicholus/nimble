@@ -40,5 +40,6 @@
     "smarttabs": false,
     "shadow": false,
     "sub": true,
-    "supernew": false
+    "supernew": false,
+    "predef": ["Ember", "DS"]
 }
