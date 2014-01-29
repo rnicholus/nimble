@@ -13,10 +13,8 @@ Nimble.UserController = Ember.Controller.extend({
             },
 
             logout: function() {
-                $.ajax({
-                    url: tokenEndpoint,
-                    type: "DELETE"
-                }).then(function() {
+                $.ajax(tokenEndpoint, {type: "DELETE"})
+                    .then(function() {
                         this.set("token", null);
                     }.bind(this)
                 );
