@@ -16,7 +16,7 @@
     "quotmark": "double",
     "undef": true,
     "unused": false,
-    "strict": true,
+    "strict": false,
     "trailing": false,
     "maxparams": 3,
     "maxdepth": 3,
@@ -41,5 +41,5 @@
     "shadow": false,
     "sub": true,
     "supernew": false,
-    "predef": ["Ember", "DS", "Nimble", "document"]
+    "predef": ["Ember", "DS", "Nimble", "document", "$"]
 }

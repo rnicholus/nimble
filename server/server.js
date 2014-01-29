@@ -1,6 +1,7 @@
 /* jshint node:true */
-"use strict";
-var express = require("express"),
+var token_endpoint = "/github/token",
+    cookie_name = "github_token",
+    express = require("express"),
     oauth_data = require("./github_oauth_data.json"),
     uuid = require("node-uuid"),
     querystring = require("querystring"),
@@ -9,6 +10,7 @@ var express = require("express"),
     states = [];
 
 app.use(express.static("./client/"));
+app.use(express.cookieParser());
 
 function check_valid_state(state) {
     var state_index = states.indexOf(state);
@@ -21,7 +23,7 @@ function check_valid_state(state) {
     return false;
 }
 
-app.get("/github/token", function(req, res) {
+app.get(token_endpoint, function(req, res) {
     var auth_params = {
             client_id: oauth_data.client_id,
             scope: oauth_data.scope,
@@ -36,6 +38,21 @@ app.get("/github/token", function(req, res) {
     res.redirect(auth_url);
 });
 
+app.delete(token_endpoint, function(req, res) {
+    var token = req.cookies[cookie_name];
+
+    console.log("Attempting to revoke authorization for " + token);
+
+    github_token.delete(oauth_data, token).then(function() {
+        console.log("Authorization revoked for " + token);
+        res.clearCookie(cookie_name).send();
+    },
+    function(reason) {
+        console.log(reason);
+        res.send(500);
+    });
+});
+
 app.get("/github/gotauth", function(req, res) {
     var state = req.query.state,
         code = req.query.code;
@@ -45,7 +62,7 @@ app.get("/github/gotauth", function(req, res) {
 
         github_token.get(oauth_data, code).then(function(token) {
             console.log("Retrieved token: " + token);
-            res.cookie("github_token", token)
+            res.cookie(cookie_name, token)
                 .redirect("/");
         },
         function(error_msg) {

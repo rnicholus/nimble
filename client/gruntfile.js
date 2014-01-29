@@ -1,5 +1,4 @@
 /* jshint node:true */
-"use strict";
 function config(name) {
     return require("./grunt_tasks/" + name + ".js");
 }

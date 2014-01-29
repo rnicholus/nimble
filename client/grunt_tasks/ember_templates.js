@@ -1,6 +1,5 @@
 /* jshint node:true */
 /* globals module */
-"use strict";
 module.exports = {
     compile: {
         options: {
