@@ -1,3 +1,8 @@
 .top-bar-section .button {
     margin-right: 10px;
 }
+
+.top-bar-section IMG.avatar {
+    max-height: 30px;
+    top: 7px;
+}

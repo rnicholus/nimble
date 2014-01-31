@@ -1,8 +1,15 @@
 /* global window */
-Nimble.UserController = Ember.Controller.extend({
+Nimble.UserController = Ember.ObjectController.extend({
+    init: function() {
+        store.init(this.get("token"));
+
+        store.load("user").done(function(data) {
+            this.set("content", data);
+        }.bind(this));
+    },
+
     token: document.cookie.replace(
         /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
-
 
     actions: (function() {
         var tokenEndpoint = "/github/token";

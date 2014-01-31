@@ -1,5 +1,10 @@
 {{#if token}}
-    <button class="button" {{action "logout"}}>Logout</button>
+    <a href="#">
+        <img class="avatar" {{bind-attr src=avatar_url}}>
+    </a>
+    <ul class="dropdown">
+        <li><a {{action "logout"}}>Logout</a></li>
+    </ul>
 {{else}}
     <button class="button" {{action "login"}}>Login</button>
 {{/if}}
