@@ -1,14 +1,14 @@
 Nimble.Store = Ember.Object.extend({
-    token: document.cookie.replace(
+    _token: document.cookie.replace(
         /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
 
-    host: "https://api.github.com",
+    _host: "https://api.github.com",
 
     load: function(type) {
         return new Promise(function(resolve, reject){
-            if (this.get("token")) {
-                $.get(this.get("host") + "/" + type, {
-                    access_token: this.get("token")
+            if (this.get("_token")) {
+                $.get(this.get("_host") + "/" + type, {
+                    access_token: this.get("_token")
                 })
                     .done(resolve.bind(this))
                     .fail(reject);
@@ -20,6 +20,6 @@ Nimble.Store = Ember.Object.extend({
     },
 
     clear_token: function() {
-        this.set("token", null);
+        this.set("_token", null);
     }
 });
