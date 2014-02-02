@@ -5,7 +5,7 @@ Nimble.Store = Ember.Object.extend({
     _host: "https://api.github.com",
 
     load: function(type) {
-        return new Promise(function(resolve, reject){
+        return new Ember.RSVP.Promise(function(resolve, reject){
             if (this.get("_token")) {
                 $.get(this.get("_host") + "/" + type, {
                     access_token: this.get("_token")
