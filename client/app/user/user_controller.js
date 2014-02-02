@@ -1,28 +1,35 @@
 /* global window */
 Nimble.UserController = Ember.ObjectController.extend({
     init: function() {
-        store.init(this.get("token"));
-
-        store.load("user").done(function(data) {
-            this.set("content", data);
+        this.get("store").load("user").then(function(data) {
+            this.setProperties({
+                content: data,
+                logged_in: true
+            });
+        }.bind(this), function() {
+            this.set("logged_in", false);
         }.bind(this));
     },
 
-    token: document.cookie.replace(
-        /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
+    content: {},
+
+    login_attempted: function() {
+        return this.get("logged_in") !== undefined;
+    }.property("logged_in"),
 
     actions: (function() {
-        var tokenEndpoint = "/github/token";
+        var authEndpoint = "/github/token";
 
         return {
             login: function() {
-                window.location = tokenEndpoint;
+                window.location = authEndpoint;
             },
 
             logout: function() {
-                $.ajax(tokenEndpoint, {type: "DELETE"})
+                $.ajax(authEndpoint, {type: "DELETE"})
                     .then(function() {
-                        this.set("token", null);
+                        this.get("store").clear_token();
+                        this.set("logged_in", false);
                     }.bind(this)
                 );
             }

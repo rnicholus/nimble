@@ -1,17 +1,25 @@
 Nimble.Store = Ember.Object.extend({
-    init: function(token) {
-        this.set("token", token);
-    },
+    token: document.cookie.replace(
+        /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
 
     host: "https://api.github.com",
 
-    load: function(type, token) {
-        return $.get(this.get("host") + "/" + type, {
-                access_token: this.get("token")
+    load: function(type) {
+        return new Promise(function(resolve, reject){
+            if (this.get("token")) {
+                $.get(this.get("host") + "/" + type, {
+                    access_token: this.get("token")
+                })
+                    .done(resolve.bind(this))
+                    .fail(reject);
             }
-        );
+            else {
+                reject();
+            }
+        }.bind(this));
+    },
+
+    clear_token: function() {
+        this.set("token", null);
     }
 });
-
-/* jshint -W079 */
-var store = Nimble.Store.create();
