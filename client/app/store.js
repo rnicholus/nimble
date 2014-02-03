@@ -4,6 +4,9 @@ Nimble.Store = Ember.Object.extend({
 
     _host: "https://api.github.com",
 
+    // TODO cache these or issue conditional request.
+    // Perhaps only issue conditional request if the data
+    // is "stale" based on elapsed time since last request?
     load: function(type) {
         return new Ember.RSVP.Promise(function(resolve, reject){
             if (this.get("_token")) {

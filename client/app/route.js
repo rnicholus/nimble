@@ -1,3 +1,5 @@
 Nimble.Router.map(function() {
-    // no routes or resources at this stage of development
+    this.resource("repos", function() {
+        this.route("repo", {path: ":repo_id"});
+    });
 });

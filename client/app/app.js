@@ -5,5 +5,6 @@ var Nimble = Ember.Application.create({
         // Inject the Store into all current and future controllers
         this.register("store:current", Nimble.Store, {singleton: true});
         this.inject("controller", "store", "store:current");
+        this.inject("route", "store", "store:current");
     }
 });
