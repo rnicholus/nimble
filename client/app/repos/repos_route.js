@@ -34,5 +34,11 @@ Nimble.ReposRoute = Ember.Route.extend({
                     });
             });
         });
+    },
+
+    renderTemplate: function() {
+        this.render("repos", {
+            outlet: "modalOutlet"
+        });
     }
 });

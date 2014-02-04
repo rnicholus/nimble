@@ -4,6 +4,7 @@
             <img class="avatar" {{bind-attr src=avatar_url}}>
         </a>
         <ul class="dropdown">
+            <li>{{#link-to 'repos'}}Change Repo{{/link-to}}</li>
             <li><a {{action "logout"}}>Logout</a></li>
         </ul>
     {{else}}
