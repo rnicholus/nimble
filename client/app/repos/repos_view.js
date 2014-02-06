@@ -3,7 +3,11 @@ Nimble.ReposView = Ember.View.extend({
         $("#reposModal").foundation("reveal", {
             closed: function() {
                 this.controller.transitionToRoute("/");
-            }.bind(this)
+            }.bind(this),
+
+            open: function() {
+                $(document).foundation();
+            }
         })
             .foundation("reveal", "open");
     }

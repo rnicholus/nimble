@@ -6,11 +6,5 @@ var Nimble = Ember.Application.create({
         this.register("store:current", Nimble.Store, {singleton: true});
         this.inject("controller", "store", "store:current");
         this.inject("route", "store", "store:current");
-
-        // This is apparently required to ensure Foundation
-        // JavaScript component work after route changes
-        $(function() {
-            $(document).foundation();
-        });
     }
 });

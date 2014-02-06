@@ -1,6 +1,29 @@
 <div id="reposModal" class="reveal-modal">
     <h2>Repositories</h2>
-    {{#each model}}
-        {{name}}
-    {{/each}}
+    <div class="section-container auto" data-section>
+        <section class="active">
+            <p class="title" data-section-title><a href="#all_repos">All</a></p>
+            <div class="content" data-section-content>
+                {{#each all}}
+                    <div>{{full_name}}</div>
+                {{/each}}
+            </div>
+        </section>
+        <section>
+            <p class="title" data-section-title><a href="#public_repos">Public</a></p>
+            <div class="content" data-section-content>
+                {{#each public}}
+                    <div>{{full_name}}</div>
+                {{/each}}
+            </div>
+        </section>
+        <section>
+            <p class="title" data-section-title><a href="#private_repos">Private</a></p>
+            <div class="content" data-section-content>
+                {{#each private}}
+                    <div>{{full_name}}</div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
 </div>
