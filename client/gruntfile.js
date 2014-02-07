@@ -22,5 +22,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask("dist",
         ["jshint", "emberTemplates", "concat"]);
+
     grunt.registerTask("default", ["watch"]);
 };
