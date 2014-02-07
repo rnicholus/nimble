@@ -1,5 +1,13 @@
 /* global window */
 Nimble.ReposController = Ember.ArrayController.extend({
+    /**
+     * Get a subset of all repo entries.
+     *
+     * @param private `true` for private repos,
+     * `false` for public,
+     * `null` for all
+     * @returns {Array} Relevant repo entries, sorted by full_name
+     */
     _getSortedRepos: function(private) {
         var repos = this.get("model");
 

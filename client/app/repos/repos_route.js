@@ -3,12 +3,15 @@ Nimble.ReposRoute = Ember.Route.extend({
         var store = this.get("store"),
             loggedInUser = store.load("user"),
             userRepos = store.load("user/repos"),
+
             userOrgsUrl = function(user) {
                 return "users/" + user.login + "/orgs";
             },
+
             orgReposUrl = function(org) {
                 return "orgs/" + org.login + "/repos";
             },
+
             allRepos = function(reposArrays) {
                 var repos = [];
                 $.each(reposArrays, function(idx, reposArray) {
@@ -17,6 +20,8 @@ Nimble.ReposRoute = Ember.Route.extend({
                 return repos;
             };
 
+        // Get all repos associated with this user,
+        // including all repos associated with any orgs user belongs to.
         // TODO handle lookup errors by calling reject
         return new Ember.RSVP.Promise(function(resolve, reject) {
             loggedInUser.then(function(user) {
