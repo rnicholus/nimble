@@ -1,5 +1,4 @@
 Nimble.Router.map(function() {
-    this.resource("repos", function() {
-        this.route("repo", {path: ":repo_id"});
-    });
+    this.route("repos");
+    this.route("repo", {path: "/repo/:repo_id"});
 });

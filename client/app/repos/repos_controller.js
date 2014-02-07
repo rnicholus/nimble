@@ -8,7 +8,7 @@ Nimble.ReposController = Ember.ArrayController.extend({
      * `null` for all
      * @returns {Array} Relevant repo entries, sorted by full_name
      */
-    _getSortedRepos: function(private) {
+    _get_sorted_repos: function(private) {
         var repos = this.get("model");
 
         if (private !== null) {
@@ -22,15 +22,23 @@ Nimble.ReposController = Ember.ArrayController.extend({
         });
     },
 
-    all: function() {
-        return this._getSortedRepos(null);
+    _all: function() {
+        return this._get_sorted_repos(null);
     }.property("model"),
 
-    public: function() {
-        return this._getSortedRepos(false);
+    _public: function() {
+        return this._get_sorted_repos(false);
     }.property("model"),
 
-    private: function() {
-        return this._getSortedRepos(true);
+    _private: function() {
+        return this._get_sorted_repos(true);
+    }.property("model"),
+
+    repos: function() {
+        return [
+            {type: "all", entries: this.get("_all")},
+            {type: "public", entries: this.get("_public")},
+            {type: "private", entries: this.get("_private")}
+        ];
     }.property("model")
 });

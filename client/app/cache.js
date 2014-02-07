@@ -1,4 +1,4 @@
-Nimble.Store = Ember.Object.extend({
+Nimble.Cache = Ember.Object.extend({
     _token: document.cookie.replace(
         /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
 

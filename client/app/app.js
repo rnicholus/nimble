@@ -3,8 +3,8 @@
 var Nimble = Ember.Application.create({
     ready: function() {
         // Inject the Store into all current and future controllers
-        this.register("store:current", Nimble.Store, {singleton: true});
-        this.inject("controller", "store", "store:current");
-        this.inject("route", "store", "store:current");
+        this.register("cache:current", Nimble.Cache, {singleton: true});
+        this.inject("controller", "cache", "cache:current");
+        this.inject("route", "cache", "cache:current");
     }
 });

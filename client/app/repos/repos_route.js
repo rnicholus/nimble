@@ -1,21 +1,21 @@
 Nimble.ReposRoute = Ember.Route.extend({
     model: function() {
-        var store = this.get("store"),
-            loggedInUser = store.load("user"),
-            userRepos = store.load("user/repos"),
+        var cache = this.get("cache"),
+            logged_in_user = cache.load("user"),
+            user_repos = cache.load("user/repos"),
 
-            userOrgsUrl = function(user) {
+            user_orgs_url = function(user) {
                 return "users/" + user.login + "/orgs";
             },
 
-            orgReposUrl = function(org) {
+            org_repos_url = function(org) {
                 return "orgs/" + org.login + "/repos";
             },
 
-            allRepos = function(reposArrays) {
+            all_repos = function(repos_arrays) {
                 var repos = [];
-                $.each(reposArrays, function(idx, reposArray) {
-                    repos = repos.concat(reposArray);
+                $.each(repos_arrays, function(idx, repos_array) {
+                    repos = repos.concat(repos_array);
                 });
                 return repos;
             };
@@ -24,17 +24,17 @@ Nimble.ReposRoute = Ember.Route.extend({
         // including all repos associated with any orgs user belongs to.
         // TODO handle lookup errors by calling reject
         return new Ember.RSVP.Promise(function(resolve, reject) {
-            loggedInUser.then(function(user) {
-                var organizations = store.load(userOrgsUrl(user))
-                    .then(function(userOrgs) {
+            logged_in_user.then(function(user) {
+                var organizations = cache.load(user_orgs_url(user))
+                    .then(function(user_orgs) {
                         var orgRepos = [];
-                        $.each(userOrgs, function(idx, userOrg) {
-                            orgRepos.push(store.load(orgReposUrl(userOrg)));
+                        $.each(user_orgs, function(idx, user_org) {
+                            orgRepos.push(cache.load(org_repos_url(user_org)));
                         });
 
-                        Ember.RSVP.Promise.all(orgRepos.concat(userRepos))
-                            .then(function(reposArrays) {
-                                resolve(allRepos(reposArrays));
+                        Ember.RSVP.Promise.all(orgRepos.concat(user_repos))
+                            .then(function(repos_array) {
+                                resolve(all_repos(repos_array));
                             });
                     });
             });
