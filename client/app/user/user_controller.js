@@ -1,7 +1,7 @@
 /* global window */
 Nimble.UserController = Ember.ObjectController.extend({
     init: function() {
-        this.get("cache").load("user").then(function(data) {
+        this.cache.load("user").then(function(data) {
             this.setProperties({
                 content: data,
                 logged_in: true
@@ -32,7 +32,7 @@ Nimble.UserController = Ember.ObjectController.extend({
             logout: function() {
                 $.ajax(authEndpoint, {type: "DELETE"})
                     .then(function() {
-                        this.get("cache").clear_token();
+                        this.cache.clear_token();
                         this.set("logged_in", false);
                     }.bind(this)
                 );

@@ -9,7 +9,8 @@ Nimble.ReposView = Ember.View.extend({
     },
 
     actions: {
-        selected_route: function() {
+        selected_repo: function(id) {
+            this.controller.cache.set("selected_repo", id);
             $("#reposModal").foundation("reveal", "close");
         }
     }

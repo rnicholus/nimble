@@ -1,6 +1,6 @@
 Nimble.ReposRoute = Ember.Route.extend({
     model: function() {
-        var cache = this.get("cache"),
+        var cache = this.cache,
             logged_in_user = cache.load("user"),
             user_repos = cache.load("user/repos"),
 

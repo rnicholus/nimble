@@ -11,7 +11,7 @@
                         {{#each entries}}
                             <li>
                                 {{#link-to "repo" id}}
-                                    <span {{action selected_route target="view"}}>
+                                    <span {{action selected_repo id target="view"}}>
                                         {{full_name}}
                                     </span>
                                 {{/link-to}}
