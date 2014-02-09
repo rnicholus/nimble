@@ -1,13 +1,23 @@
-<nav class="top-bar" data-topbar>
-    <ul class="title-area">
-        <li class="name">
-            <h1><a href="#">Nimble</a></h1>
-        </li>
-    </ul>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">nimble</a>
+        </div>
 
-    <section class="top-bar-section">
-        <ul class="right">
-            <li class="has-dropdown">{{render user}}</li>
-        </ul>
-    </section>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div id="repo-chooser-center" class="text-center">
+                TODO repo name/selector
+            </div>
+
+            <ul class="nav navbar-nav pull-right">
+                {{render user}}
+            </ul>
+        </div>
+    </div>
 </nav>

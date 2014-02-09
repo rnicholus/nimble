@@ -36,9 +36,9 @@ Nimble.ReposController = Ember.ArrayController.extend({
 
     repos: function() {
         return [
-            {type: "all", entries: this.get("_all")},
-            {type: "public", entries: this.get("_public")},
-            {type: "private", entries: this.get("_private")}
+            {type: "all", nav_id: "#all", entries: this.get("_all")},
+            {type: "public", nav_id: "#public", entries: this.get("_public")},
+            {type: "private", nav_id: "#private", entries: this.get("_private")}
         ];
     }.property("model")
 });

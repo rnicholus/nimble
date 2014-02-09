@@ -10,9 +10,6 @@ Nimble.UserController = Ember.ObjectController.extend({
             this.set("logged_in", false);
         }.bind(this));
 
-        $(function() {
-            $(document).foundation();
-        });
     },
 
     content: {},
