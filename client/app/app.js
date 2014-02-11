@@ -8,3 +8,22 @@ var Nimble = Ember.Application.create({
         this.inject("route", "cache", "cache:current");
     }
 });
+
+Nimble.ApplicationRoute = Ember.Route.extend({
+    actions: {
+        open_modal: function(modalName, model) {
+            this.controllerFor(modalName).set("model", model);
+            return this.render(modalName, {
+                into: "application",
+                outlet: "modal"
+            });
+        },
+
+        close_modal: function() {
+            return this.disconnectOutlet({
+                outlet: "modal",
+                parentView: "application"
+            });
+        }
+    }
+});

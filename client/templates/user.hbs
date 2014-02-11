@@ -5,7 +5,7 @@
             <span class="caret"></span>
             <ul class="dropdown-menu" aria-labelledby="user_menu">
                 <li id="repo-chooser-user-menu">{{#link-to 'repos'}}Change Repo{{/link-to}}</li>
-                <li><a {{action "logout"}}>Logout</a></li>
+                <li><button {{action "logout"}} class="btn btn-link">Logout</button></li>
             </ul>
         </ul>
     {{else}}

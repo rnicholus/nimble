@@ -1,20 +1,23 @@
 /* globals localStorage */
+//TODO Don't even make ajax requests unless "forced" or cache entry is missing
 Nimble.Cache = Ember.Object.extend({
+    _repo: localStorage.getItem("nimble-selected_repo"),
+
+    selected_repo: function(key_name, new_id) {
+        if (arguments.length > 1) {
+            localStorage.setItem("nimble-selected_repo", new_id);
+            this.set("_repo", new_id);
+        }
+
+        return this._repo;
+    }.property("_repo"),
+
     _token: document.cookie.replace(
         /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
 
     _host: "https://api.github.com",
 
     _cache: {},
-
-    selected_repo: function(key_name, new_id) {
-        if (arguments.length > 1) {
-            localStorage.setItem("nimble-selected_repo", new_id);
-        }
-        else {
-            return localStorage.getItem("nimble-selected_repo");
-        }
-    }.property(),
 
     _handle_xhr_success: function(type, data, xhr) {
         var etag = xhr.getResponseHeader("ETag");

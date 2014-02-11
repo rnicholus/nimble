@@ -11,9 +11,9 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
-            <div id="repo-chooser-center" class="text-center">
-                TODO repo name/selector
-            </div>
+            <a {{action open_modal "repo_chooser"}} id="repo-chooser-center" class="text-center pointer block">
+                {{controllers.repo_chooser.current_name}}
+            </a>
 
             <ul class="nav navbar-nav pull-right">
                 {{render user}}

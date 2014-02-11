@@ -1,8 +1,12 @@
-Nimble.ReposView = Ember.View.extend({
+Nimble.RepoChooserView = Ember.View.extend({
     didInsertElement: function() {
-        $("#repos-modal").modal("show").on("shown.bs.modal", function() {
-            $(this).find(".nav li:first a").click();
-        });
+        $("#repos-modal").modal("show")
+            .on("shown.bs.modal", function() {
+                $(this).find(".nav li:first a").click();
+            })
+            .on("hidden.bs.modal", function() {
+                return this.controller.send("close_modal");
+            }.bind(this));
     },
 
     actions: {
