@@ -11,11 +11,13 @@ Nimble.RepoChooserView = Ember.View.extend({
 
     actions: {
         // TODO selected_repo should be the name, not the ID
-        selected_repo: function(id) {
-            this.controller.cache.set("selected_repo", id);
+        selected_repo: function(owner, name) {
+            var repo = {owner: owner, name: name};
+
+            this.controller.cache.set("selected_repo", repo);
 
             $("#repos-modal").modal("hide").on("hidden.bs.modal", function() {
-                this.controller.transitionToRoute("repo", id);
+                this.controller.transitionToRoute("issues", repo);
             }.bind(this));
         }
     }

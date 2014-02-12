@@ -2,23 +2,21 @@ Nimble.RepoChooserController = Ember.ObjectController.extend({
     init: function() {
         this._get_all_repos().then(function(repos) {
             this.set("_all_repos", repos);
-            this._update_current_repo_name();
         }.bind(this));
     },
 
     _all_repos: [],
 
-    current_name: "",
+    current_name: function() {
+        var selected_repo = this.cache.get("selected_repo");
 
-    _update_current_repo_name: function() {
-        // TODO selected_repo should be the name, not the ID
-        var name = $.grep(this.get("_all_repos"), function(repo, index) {
-            /* jshint eqeqeq:false */
-            return repo.id == this.cache.get("selected_repo");
-        }.bind(this))[0].full_name;
+        if (selected_repo) {
+            return selected_repo.owner + "/" + selected_repo.name;
+        }
 
-        this.set("current_name", name);
-    },
+        return null;
+
+    }.property("this.cache.selected_repo"),
 
     _get_all_repos: function() {
         var cache = this.cache,
@@ -61,10 +59,6 @@ Nimble.RepoChooserController = Ember.ObjectController.extend({
             });
         });
     },
-
-    _selected_repo_observer: function() {
-        this._update_current_repo_name();
-    }.observes("this.cache.selected_repo"),
 
     /**
      * Get a subset of all repo entries.

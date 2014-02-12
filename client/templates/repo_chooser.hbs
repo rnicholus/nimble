@@ -22,7 +22,7 @@
                             <ul class="no-bullet">
                                 {{#each entries}}
                                     <li>
-                                        <a class="pointer" {{action selected_repo id target="view"}}>
+                                        <a class="pointer" {{action selected_repo owner.login name target="view"}}>
                                             {{full_name}}
                                         </a>
                                     </li>

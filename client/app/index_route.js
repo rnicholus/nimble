@@ -4,7 +4,7 @@ Nimble.IndexRoute = Ember.Route.extend({
 
         // Load the last selected repo, if one exists
         if (repo !== null) {
-            this.transitionTo("repo", repo);
+            this.transitionTo("issues", repo);
         }
     }
 });

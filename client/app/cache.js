@@ -1,12 +1,13 @@
 /* globals localStorage */
 Nimble.Cache = Ember.Object.extend({
-    _repo: localStorage.getItem("nimble-selected_repo"),
+    _repo: JSON.parse(localStorage.getItem("nimble.selected_repo")),
 
-    // TODO selected_repo should be the name, not the ID
-    selected_repo: function(key_name, new_id) {
+    selected_repo: function(key_name, new_repo) {
         if (arguments.length > 1) {
-            localStorage.setItem("nimble-selected_repo", new_id);
-            this.set("_repo", new_id);
+            localStorage.setItem("nimble.selected_repo",
+                JSON.stringify(new_repo));
+
+            this.set("_repo", new_repo);
         }
 
         return this._repo;

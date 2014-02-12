@@ -1,5 +1,5 @@
 Nimble.IssuesRoute = Ember.Route.extend({
-    model: function(params) {
-        console.log(params);
+    setupController: function(controller, model) {
+        console.log(model);
     }
 });
