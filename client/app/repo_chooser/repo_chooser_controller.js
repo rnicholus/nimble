@@ -1,6 +1,9 @@
 Nimble.RepoChooserController = Ember.ObjectController.extend({
     init: function() {
-        this._update_current_repo_name();
+        this._get_all_repos().then(function(repos) {
+            this.set("_all_repos", repos);
+            this._update_current_repo_name();
+        }.bind(this));
     },
 
     _all_repos: [],
@@ -8,16 +11,13 @@ Nimble.RepoChooserController = Ember.ObjectController.extend({
     current_name: "",
 
     _update_current_repo_name: function() {
-        this._get_all_repos().then(function(repos) {
-            this.set("_all_repos", repos);
+        // TODO selected_repo should be the name, not the ID
+        var name = $.grep(this.get("_all_repos"), function(repo, index) {
+            /* jshint eqeqeq:false */
+            return repo.id == this.cache.get("selected_repo");
+        }.bind(this))[0].full_name;
 
-            var name = $.grep(repos, function(repo, index) {
-                /* jshint eqeqeq:false */
-                return repo.id == this.cache.get("selected_repo");
-            }.bind(this))[0].full_name;
-
-            this.set("current_name", name);
-        }.bind(this));
+        this.set("current_name", name);
     },
 
     _get_all_repos: function() {

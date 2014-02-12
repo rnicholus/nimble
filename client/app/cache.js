@@ -2,6 +2,7 @@
 Nimble.Cache = Ember.Object.extend({
     _repo: localStorage.getItem("nimble-selected_repo"),
 
+    // TODO selected_repo should be the name, not the ID
     selected_repo: function(key_name, new_id) {
         if (arguments.length > 1) {
             localStorage.setItem("nimble-selected_repo", new_id);
@@ -38,46 +39,40 @@ Nimble.Cache = Ember.Object.extend({
         return this._copy_of_cached_item(type);
     },
 
-    load: function(type, flag) {
+    load: function(type) {
         var headers = {};
 
-        if (flag === this.flags.FORCE_UPDATE || !this._cache[type]) {
-            // If this data is already represented in the cache,
-            // send a conditional request.  The response will be a
-            // 304 sans the result set if nothing has changed.
-            if (this._cache[type]) {
-                headers["If-None-Match"] = this._cache[type].etag;
-            }
-
-            return new Ember.RSVP.Promise(function(resolve, reject){
-                if (this.get("_token")) {
-                    $.ajax(this.get("_host") + "/" + type, {
-                        type: "GET",
-
-                        headers: headers,
-
-                        data: {
-                            access_token: this.get("_token")
-                        }
-                    })
-                        .done(function(data, textStatus, jq_xhr) {
-                            resolve(this._handle_xhr_success(
-                                type,
-                                data,
-                                jq_xhr
-                            ));
-                        }.bind(this))
-
-                        .fail(reject);
-                }
-                else {
-                    reject();
-                }
-            }.bind(this));
+        // If this data is already represented in the cache,
+        // send a conditional request.  The response will be a
+        // 304 sans the result set if nothing has changed.
+        if (this._cache[type]) {
+            headers["If-None-Match"] = this._cache[type].etag;
         }
 
-        return new Ember.RSVP.Promise(function(resolve) {
-            resolve(this._copy_of_cached_item(type));
+        return new Ember.RSVP.Promise(function(resolve, reject){
+            if (this.get("_token")) {
+                $.ajax(this.get("_host") + "/" + type, {
+                    type: "GET",
+
+                    headers: headers,
+
+                    data: {
+                        access_token: this.get("_token")
+                    }
+                })
+                    .done(function(data, textStatus, jq_xhr) {
+                        resolve(this._handle_xhr_success(
+                            type,
+                            data,
+                            jq_xhr
+                        ));
+                    }.bind(this))
+
+                    .fail(reject);
+            }
+            else {
+                reject();
+            }
         }.bind(this));
     },
 
@@ -85,7 +80,3 @@ Nimble.Cache = Ember.Object.extend({
         this.set("_token", null);
     }
 });
-
-Nimble.Cache.prototype.flags = {
-    FORCE_UPDATE: "force_update"
-};

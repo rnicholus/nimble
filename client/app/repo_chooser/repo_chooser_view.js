@@ -10,6 +10,7 @@ Nimble.RepoChooserView = Ember.View.extend({
     },
 
     actions: {
+        // TODO selected_repo should be the name, not the ID
         selected_repo: function(id) {
             this.controller.cache.set("selected_repo", id);
 
