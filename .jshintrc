@@ -41,5 +41,5 @@
     "shadow": false,
     "sub": true,
     "supernew": false,
-    "predef": ["Ember", "Nimble", "document", "$", "localStorage"]
+    "predef": ["Ember", "Nimble", "document", "$", "localStorage", "console", "window"]
 }

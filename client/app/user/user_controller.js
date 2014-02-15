@@ -1,4 +1,3 @@
-/* global window */
 Nimble.UserController = Ember.ObjectController.extend({
     init: function() {
         this.cache.load("user").then(function(data) {

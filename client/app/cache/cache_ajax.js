@@ -1,26 +1,4 @@
-Nimble.Cache = Ember.Object.extend({
-    _selected_repo_key: "nimble.selected_repo",
-
-    _repo: JSON.parse(localStorage.getItem(this._selected_repo_key)),
-
-    selected_repo: function(key_name, new_repo) {
-        if (arguments.length > 1) {
-            localStorage.setItem(this._selected_repo_key,
-                JSON.stringify(new_repo));
-
-            this.set("_repo", new_repo);
-        }
-
-        return this._repo;
-    }.property("_repo"),
-
-    _token: document.cookie.replace(
-        /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
-
-    _host: "https://api.github.com",
-
-    _cache: {},
-
+Nimble.Cache.reopen({
     _copy_of_cached_item: function(type) {
         return $.extend(
             true,
@@ -76,14 +54,5 @@ Nimble.Cache = Ember.Object.extend({
                 reject();
             }
         }.bind(this));
-    },
-
-    clear_token: function() {
-        this.set("_token", null);
-        localStorage.removeItem(this._selected_repo_key);
-    },
-
-    logged_in: function() {
-        return !!this.get("_token");
-    }.property("_token")
+    }
 });
