@@ -6,5 +6,8 @@ Nimble.IndexRoute = Ember.Route.extend({
         if (repo !== null) {
             this.transitionTo("issues", repo);
         }
+        else {
+            this.transitionTo("repos");
+        }
     }
 });
