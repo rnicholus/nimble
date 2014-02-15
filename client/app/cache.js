@@ -1,4 +1,3 @@
-/* globals localStorage */
 Nimble.Cache = Ember.Object.extend({
     _repo: JSON.parse(localStorage.getItem("nimble.selected_repo")),
 

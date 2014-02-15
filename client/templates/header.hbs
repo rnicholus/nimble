@@ -12,8 +12,14 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <!--This is probably not the best way to center this element.  TODO Fix this.-->
-            <a {{action open_modal "repo_chooser"}} id="repo-chooser-center" class="text-center pointer block">
+            <a {{action open_modal "repo_chooser"}} id="repo-chooser-center"
+                    class="text-center pointer block" data-container="body"
+                    data-toggle="popover" data-placement="bottom"
+                    data-html="true"
+                    data-content="<button id='close-repo-chooser-popover' class='close'>x</button><div>Click here at any time to select a new repo.</div>">
+
                 {{controllers.repo_chooser.current_name}}
+
             </a>
 
             <ul class="nav navbar-nav pull-right">
