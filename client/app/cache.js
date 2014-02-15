@@ -1,9 +1,11 @@
 Nimble.Cache = Ember.Object.extend({
-    _repo: JSON.parse(localStorage.getItem("nimble.selected_repo")),
+    _selected_repo_key: "nimble.selected_repo",
+
+    _repo: JSON.parse(localStorage.getItem(this._selected_repo_key)),
 
     selected_repo: function(key_name, new_repo) {
         if (arguments.length > 1) {
-            localStorage.setItem("nimble.selected_repo",
+            localStorage.setItem(this._selected_repo_key,
                 JSON.stringify(new_repo));
 
             this.set("_repo", new_repo);
@@ -78,5 +80,10 @@ Nimble.Cache = Ember.Object.extend({
 
     clear_token: function() {
         this.set("_token", null);
-    }
+        localStorage.removeItem(this._selected_repo_key);
+    },
+
+    logged_in: function() {
+        return !!this.get("_token");
+    }.property("_token")
 });

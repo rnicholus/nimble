@@ -10,6 +10,12 @@ var Nimble = Ember.Application.create({
 });
 
 Nimble.ApplicationRoute = Ember.Route.extend({
+    redirect: function() {
+        if (!this.cache.get("logged_in")) {
+            this.controllerFor("user").send("login");
+        }
+    },
+
     actions: {
         open_modal: function(modalName, model) {
             this.controllerFor(modalName).set("model", model);
