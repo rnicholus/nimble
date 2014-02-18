@@ -19,20 +19,7 @@
     display: block;
 }
 
-/*Show the current repo & chooser only in the center of the nav bar on desktop screens.
- On small screens, hide this and display a repo chooser link in the user dropdown
-instead.*/
 #repo-chooser-center {
     padding-top: 15px;
     margin-bottom: -100px;
-}
-@media (max-width: 768px) {
-    #repo-chooser-center {
-        display: none;
-    }
-}
-@media (min-width: 768px) {
-    #repo-chooser-user-menu {
-        display: none;
-    }
 }
