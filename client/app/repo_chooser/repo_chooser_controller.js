@@ -48,7 +48,8 @@ Nimble.RepoChooserController = Ember.ObjectController.extend({
                     .then(function(user_orgs) {
                         var orgRepos = [];
                         $.each(user_orgs, function(idx, user_org) {
-                            orgRepos.push(cache.load(org_repos_url(user_org)));
+                            orgRepos.push(cache.load(org_repos_url(user_org),
+                                {per_page: 100}));
                         });
 
                         Ember.RSVP.Promise.all(orgRepos.concat(user_repos))
@@ -78,7 +79,16 @@ Nimble.RepoChooserController = Ember.ObjectController.extend({
         }
 
         return repos.sort(function(a, b) {
-            return a.full_name < b.full_name;
+            var aName = a.full_name.toLowerCase(),
+                bName = b.full_name.toLowerCase();
+
+            if (aName < bName) {
+                return -1;
+            }
+            if (aName > bName) {
+                return 1;
+            }
+            return 0;
         });
     },
 

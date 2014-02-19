@@ -19,7 +19,7 @@ Nimble.Cache.reopen({
         return this._copy_of_cached_item(type);
     },
 
-    load: function(type) {
+    load: function(type, params) {
         var headers = {};
 
         // If this data is already represented in the cache,
@@ -29,16 +29,19 @@ Nimble.Cache.reopen({
             headers["If-None-Match"] = this._cache[type].etag;
         }
 
-        return new Ember.RSVP.Promise(function(resolve, reject){
+        return new Ember.RSVP.Promise(function(resolve, reject) {
             if (this.get("_token")) {
+                var data = {access_token: this.get("_token")};
+
+                if (params) {
+                    $.extend(data, params);
+                }
+
                 $.ajax(this.get("_host") + "/" + type, {
                     type: "GET",
 
                     headers: headers,
-
-                    data: {
-                        access_token: this.get("_token")
-                    }
+                    data: data
                 })
                     .done(function(data, textStatus, jq_xhr) {
                         resolve(this._handle_xhr_success(
