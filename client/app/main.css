@@ -23,3 +23,14 @@
     padding-top: 15px;
     margin-bottom: -100px;
 }
+
+#main-alert {
+    top: 0;
+    position: absolute;
+    z-index: 99999;
+    left: 50%;
+    right: 50%;
+    margin-left: -200px;
+    margin-right: -200px;
+    text-align: center;
+}

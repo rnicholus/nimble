@@ -30,6 +30,24 @@ Nimble.ApplicationRoute = Ember.Route.extend({
                 outlet: "modal",
                 parentView: "application"
             });
+        },
+
+        open_alert: function(message) {
+            this.controllerFor("alert").set("model", {message: message});
+            return this.render("alert", {
+                into: "application",
+                outlet: "alert"
+            });
+        },
+
+        // TODO Find a way to trigger hide event on alert view so any
+        // controller/route can simply close the alert view this event
+        // to disconnect the outlet and hide the alert.
+        close_alert: function() {
+            return this.disconnectOutlet({
+                outlet: "alert",
+                parentView: "application"
+            });
         }
     }
 });
