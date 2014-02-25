@@ -6,7 +6,14 @@
                 <h4 class="modal-title">Setup Columns</h4>
             </div>
             <div class="modal-body">
-                TODO
+                <ol id="column-list">
+                    <li class="list-input"><input type="text"></li>
+                    <li class="list-input"><input type="text"></li>
+                    <li class="list-input"><input type="text"></li>
+                </ol>
+
+                <button class="btn btn-default" {{action add_column target="view"}}>More</button>
+                <button class="btn btn-primary pull-right" {{action save_columns target="view"}}>Done</button>
             </div>
         </div>
     </div>

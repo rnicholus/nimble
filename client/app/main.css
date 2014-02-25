@@ -34,3 +34,7 @@
     margin-right: -200px;
     text-align: center;
 }
+
+#column-list .list-input {
+    padding-bottom: 15px;
+}
