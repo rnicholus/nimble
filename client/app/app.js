@@ -32,8 +32,11 @@ Nimble.ApplicationRoute = Ember.Route.extend({
             });
         },
 
-        open_alert: function(message) {
-            this.controllerFor("alert").set("model", {message: message});
+        open_alert: function(message, opt_level) {
+            this.controllerFor("alert").set("model", {
+                message: message,
+                level: opt_level || "info"
+            });
             return this.render("alert", {
                 into: "application",
                 outlet: "alert"

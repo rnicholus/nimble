@@ -7,12 +7,6 @@ Nimble.ColumnChooserView = Ember.View.extend({
     },
 
     actions: {
-        selected_repo: function(owner, name) {
-            $("#columns-modal").modal("hide").on("hidden.bs.modal", function() {
-                //TODO
-            }.bind(this));
-        },
-
         add_column: function() {
             var $list_input = this.$(".list-input:first").clone();
 
@@ -28,8 +22,25 @@ Nimble.ColumnChooserView = Ember.View.extend({
                 name && names.push(name);
             });
 
-            this.controller.send("close_modal");
-            this.controller.save_columns(names);
+            if (names.length) {
+                this.controller.save_columns(names).then(
+                    function() {
+                        $("#columns-modal").modal("hide");
+                    },
+                    function() {
+                        this.controller.send(
+                            "open_alert",
+                            "There was a problem saving the columns to GitHub.",
+                            "error");
+                    }.bind(this)
+                );
+            }
+            else {
+                this.controller.send(
+                    "open_alert",
+                    "At least one column is required!",
+                    "error");
+            }
         }
     }
 });

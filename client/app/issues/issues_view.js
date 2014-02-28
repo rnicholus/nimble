@@ -4,7 +4,7 @@ Nimble.IssuesView = Ember.View.extend({
 
         $.each(this.controller.get("columns"), function(idx, column) {
             var match = column.name.match(/(\d+)\s*-\s*(.+)/),
-                columnIdx = parseInt(match[1]) - 1;
+                columnIdx = parseInt(match[1]);
 
             names[columnIdx] = match[2];
         });

@@ -7,7 +7,7 @@ Nimble.Cache.reopen({
         );
     },
 
-    _handle_xhr_success: function(type, data, xhr) {
+    _handle_load_success: function(type, data, xhr) {
         var etag = xhr.getResponseHeader("ETag");
 
         // If this was not a conditional request, or it was and the data
@@ -44,13 +44,39 @@ Nimble.Cache.reopen({
                     data: data
                 })
                     .done(function(data, textStatus, jq_xhr) {
-                        resolve(this._handle_xhr_success(
+                        resolve(this._handle_load_success(
                             type,
                             data,
                             jq_xhr
                         ));
                     }.bind(this))
 
+                    .fail(reject);
+            }
+            else {
+                reject();
+            }
+        }.bind(this));
+    },
+
+    save: function(type, params) {
+        var headers = {};
+
+        return new Ember.RSVP.Promise(function(resolve, reject) {
+            if (this.get("_token")) {
+                var host = this.get("_host"),
+                    token = this.get("_token");
+
+                $.ajax("%@/%@?access_token=%@".fmt(host, type, token), {
+                    type: "POST",
+
+                    headers: headers,
+                    contentType: "application/json",
+                    data: JSON.stringify(params)
+                })
+                    .done(function(data, textStatus, jq_xhr) {
+                        resolve();
+                    })
                     .fail(reject);
             }
             else {
