@@ -18,7 +18,7 @@ Nimble.ColumnChooserController = Ember.ObjectController.extend({
 
         save_promise.then(
             function() {
-                this.transitionToRoute("index");
+                this.transitionToRoute("issues", selected_repo);
             }.bind(this),
             function() {
                 console.error("Failed to save columns as labels!");
