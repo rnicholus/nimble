@@ -4,6 +4,14 @@ Nimble.ColumnChooserView = Ember.View.extend({
             .on("hidden.bs.modal", function() {
                 return this.controller.send("close_modal");
             }.bind(this));
+
+        this._make_sortable();
+    },
+
+    _make_sortable: function() {
+        this.$("#column-list").sortable({
+            handle: ".glyphicon-move"
+        });
     },
 
     actions: {
@@ -12,6 +20,8 @@ Nimble.ColumnChooserView = Ember.View.extend({
 
             $list_input.find("input").val("");
             this.$(".list-input:last").after($list_input);
+
+            this._make_sortable();
         },
 
         save_columns: function() {

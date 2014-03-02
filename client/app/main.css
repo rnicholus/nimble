@@ -38,3 +38,8 @@
 #column-list .list-input {
     padding-bottom: 15px;
 }
+
+#column-list .list-input I.glyphicon-move {
+    padding-left: 5px;
+    cursor: move;
+}
