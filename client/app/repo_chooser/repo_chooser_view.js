@@ -6,10 +6,6 @@ Nimble.RepoChooserView = Ember.View.extend({
             }.bind(this));
     },
 
-    test: function() {
-        return this.contentIndex;
-    }.property(),
-
     repos: function() {
         return this.controller.get("repos").map(function(i, idx) {
             return {repo: i, active: idx === 0};
