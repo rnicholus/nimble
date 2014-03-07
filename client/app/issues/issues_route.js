@@ -5,7 +5,7 @@ Nimble.IssuesRoute = Ember.Route.extend({
         this.cache.load("repos/%@/%@/labels".fmt(model.owner, model.name))
             .then(
             function(data) {
-                controller.set("issues", data);
+                controller.set("labels", data);
             },
             function(xhr) {
                 if (xhr.status >= 400) {

@@ -1,11 +1,11 @@
 Nimble.IssuesController = Ember.Controller.extend({
-    issues: [],
+    labels: [],
 
     columns: function() {
-        return $.grep(this.get("issues"), function(issue) {
+        return $.grep(this.get("labels"), function(issue) {
             return (/\d+ -.+/).test(issue.name);
         });
-    }.property("issues"),
+    }.property("labels"),
 
     column_observer: function() {
         if(!this.get("columns").length) {
