@@ -4,7 +4,6 @@
             <img class="avatar dropdown-toggle" id="user_menu" data-toggle="dropdown" {{bind-attr src=avatar_url}}>
             <span class="caret"></span>
             <ul class="dropdown-menu" aria-labelledby="user_menu">
-                <li id="repo-chooser-user-menu">{{#link-to 'repos'}}Change Repo{{/link-to}}</li>
                 <li><button {{action "logout"}} class="btn btn-link">Logout</button></li>
             </ul>
         </ul>
