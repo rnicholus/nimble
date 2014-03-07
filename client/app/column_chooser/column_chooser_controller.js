@@ -18,7 +18,10 @@ Nimble.ColumnChooserController = Ember.ObjectController.extend({
 
         save_promise.then(
             function() {
-                this.transitionToRoute("issues", selected_repo);
+                // I must "trick" Ember here by cloning the selected_repo object.  If we are already on the
+                // issues route, and the selected_repo has not changed, the transition will be a no-op
+                // and the issues route won't be hit.
+                this.transitionToRoute("issues", $.extend({}, selected_repo));
             }.bind(this),
             function() {
                 console.error("Failed to save columns as labels!");
