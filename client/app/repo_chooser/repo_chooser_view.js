@@ -1,13 +1,20 @@
 Nimble.RepoChooserView = Ember.View.extend({
     didInsertElement: function() {
         $("#repos-modal").modal("show")
-            .on("shown.bs.modal", function() {
-                $(this).find(".nav li:first a").click();
-            })
             .on("hidden.bs.modal", function() {
                 return this.controller.send("close_modal");
             }.bind(this));
     },
+
+    test: function() {
+        return this.contentIndex;
+    }.property(),
+
+    repos: function() {
+        return this.controller.get("repos").map(function(i, idx) {
+            return {repo: i, active: idx === 0};
+        });
+    }.property("controller.repos"),
 
     actions: {
         selected_repo: function(owner, name) {
