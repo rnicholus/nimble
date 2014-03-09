@@ -19,9 +19,17 @@
     display: block;
 }
 
-#repo-chooser-center {
+#logo {
+    width: 40%;
+}
+
+#repo-menu {
     padding-top: 15px;
     margin-bottom: -100px;
+}
+
+#user-menu {
+    width: 40%;
 }
 
 #main-alert {

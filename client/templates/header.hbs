@@ -1,24 +1,35 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="nav navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header">
+        <div id="logo" class="navbar-header pull-left">
             <a class="navbar-brand" href="/">nimble</a>
         </div>
 
-        <div class="" id="navbar">
-            <!--This is probably not the best way to center this element.  TODO Fix this.-->
-            <a {{action open_modal "repo_chooser"}} id="repo-chooser-center"
-                    class="text-center pointer block" data-container="body"
-                    data-toggle="popover" data-placement="bottom"
-                    data-html="true"
-                    data-content="<button id='close-repo-chooser-popover' class='close'>x</button><div>Click here at any time to select a new repo.</div>">
-
-                {{controllers.repo_chooser.current_name}}
-
-            </a>
-
-            <ul class="nav navbar-nav pull-right">
+        <div id="user-menu" class="pull-right nav navbar-nav">
+            <ul class="pull-right">
                 {{render user}}
             </ul>
         </div>
+
+        <ul id="repo-menu" class="dropdown text-center nav navbar-nav">
+            <div class="dropdown-toggle" class="text-center" data-toggle="dropdown">
+                {{controllers.repo_chooser.current_name}}
+                <span class="caret"></span>
+            </div>
+            <ul class="dropdown-menu text-center">
+                <li>
+                    <button class="btn btn-link">TODO: Edit Columns</button>
+                </li>
+                <li>
+                    <button {{action open_modal "repo_chooser"}}
+                            class="btn btn-link"
+                            data-container="body"
+                            data-toggle="popover" data-placement="bottom"
+                            data-html="true"
+                            data-content="<button id='close-repo-chooser-popover' class='close'>x</button><div>Click here at any time to select a new repo.</div>">
+                        Change Repo
+                    </button>
+                </li>
+            </ul>
+        </ul>
     </div>
 </nav>
