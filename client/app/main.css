@@ -20,18 +20,25 @@
 }
 
 #logo {
-    width: 35%;
+    width: 40%;
 }
 
 #repo-menu {
     cursor: pointer;
     padding-top: 15px;
     margin-bottom: -100px;
-    margin-left: 75px;
+}
+
+#repo-menu .repo-name {
+    position: fixed;
+}
+
+#repo-menu UL.dropdown-menu {
+    margin-top: 20px;
 }
 
 #user-menu {
-    width: 35%;
+    width: 40%;
 }
 
 #main-alert {

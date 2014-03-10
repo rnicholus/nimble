@@ -12,9 +12,11 @@
 
         <ul id="repo-menu" class="dropdown text-center nav navbar-nav">
             <div class="dropdown-toggle" data-toggle="dropdown">
-                {{controllers.repo_chooser.current_name}}
-                <span class="caret"
-                      data-container="body"
+                <span class="repo-name">
+                    {{controllers.repo_chooser.current_name}}
+                    <span class="caret"></span>
+                </span>
+                <span data-container="body"
                       data-toggle="popover" data-placement="bottom"
                       data-html="true"
                       data-content="<button id='close-repo-chooser-popover' class='close'>x</button><div>Click here at any time to select a new repo.</div>">
