@@ -1,4 +1,6 @@
 Nimble.ColumnChooserController = Ember.ObjectController.extend({
+    needs: "issues",
+
     save_columns: function(names) {
         var selected_repo = this.cache.get("selected_repo"),
             repo_name = selected_repo.name,
@@ -29,5 +31,9 @@ Nimble.ColumnChooserController = Ember.ObjectController.extend({
         );
 
         return save_promise;
-    }
+    },
+
+    existing_columns: function() {
+        return this.get("controllers.issues.column_names");
+    }.property("controllers.issues.column_names")
 });

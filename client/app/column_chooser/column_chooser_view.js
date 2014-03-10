@@ -1,4 +1,13 @@
 Nimble.ColumnChooserView = Ember.View.extend({
+    columns: function() {
+        var columns = this.controller.get("existing_columns");
+
+        if (columns.length) {
+            return columns;
+        }
+        return [null, null, null];
+    }.property("controller.existing_columns"),
+
     didInsertElement: function() {
         $("#columns-modal").modal("show")
             .on("hidden.bs.modal", function() {

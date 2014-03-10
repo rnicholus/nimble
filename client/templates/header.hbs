@@ -11,22 +11,26 @@
         </div>
 
         <ul id="repo-menu" class="dropdown text-center nav navbar-nav">
-            <div class="dropdown-toggle" class="text-center" data-toggle="dropdown">
+            <div class="dropdown-toggle" data-toggle="dropdown">
                 {{controllers.repo_chooser.current_name}}
-                <span class="caret"></span>
+                <span class="caret"
+                      data-container="body"
+                      data-toggle="popover" data-placement="bottom"
+                      data-html="true"
+                      data-content="<button id='close-repo-chooser-popover' class='close'>x</button><div>Click here at any time to select a new repo.</div>">
+              </span>
             </div>
-            <ul class="dropdown-menu text-center">
-                <li>
-                    <button class="btn btn-link">TODO: Edit Columns</button>
-                </li>
+            <ul class="dropdown-menu">
                 <li>
                     <button {{action open_modal "repo_chooser"}}
-                            class="btn btn-link"
-                            data-container="body"
-                            data-toggle="popover" data-placement="bottom"
-                            data-html="true"
-                            data-content="<button id='close-repo-chooser-popover' class='close'>x</button><div>Click here at any time to select a new repo.</div>">
+                            class="btn btn-link">
                         Change Repo
+                    </button>
+                </li>
+                <li>
+                    <button {{action open_modal "column_chooser"}}
+                            class="btn btn-link">
+                        Edit Columns
                     </button>
                 </li>
             </ul>

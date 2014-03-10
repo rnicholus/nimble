@@ -7,18 +7,12 @@
             </div>
             <div class="modal-body">
                 <ol id="column-list">
-                    <li class="list-input">
-                        <input type="text">
-                        <i class="glyphicon glyphicon-move"></i>
-                    </li>
-                    <li class="list-input">
-                        <input type="text">
-                        <i class="glyphicon glyphicon-move"></i>
-                    </li>
-                    <li class="list-input">
-                        <input type="text">
-                        <i class="glyphicon glyphicon-move"></i>
-                    </li>
+                    {{#each column in view.columns}}
+                        <li class="list-input">
+                            <input type="text" {{bind-attr value="column"}}>
+                            <i class="glyphicon glyphicon-move"></i>
+                        </li>
+                    {{/each}}
                 </ol>
 
                 <button class="btn btn-default" {{action add_column target="view"}}>More</button>

@@ -20,16 +20,18 @@
 }
 
 #logo {
-    width: 40%;
+    width: 35%;
 }
 
 #repo-menu {
+    cursor: pointer;
     padding-top: 15px;
     margin-bottom: -100px;
+    margin-left: 75px;
 }
 
 #user-menu {
-    width: 40%;
+    width: 35%;
 }
 
 #main-alert {
