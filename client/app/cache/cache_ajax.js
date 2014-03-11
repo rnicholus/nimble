@@ -59,18 +59,14 @@ Nimble.Cache.reopen({
         }.bind(this));
     },
 
-    save: function(type, params) {
-        var headers = {};
-
+    save: function(type, params, method) {
         return new Ember.RSVP.Promise(function(resolve, reject) {
             if (this.get("_token")) {
                 var host = this.get("_host"),
                     token = this.get("_token");
 
                 $.ajax("%@/%@?access_token=%@".fmt(host, type, token), {
-                    type: "POST",
-
-                    headers: headers,
+                    type: method || "POST",
                     contentType: "application/json",
                     data: JSON.stringify(params)
                 })
@@ -83,5 +79,29 @@ Nimble.Cache.reopen({
                 reject();
             }
         }.bind(this));
+    },
+
+    remove: function(type) {
+        return new Ember.RSVP.Promise(function(resolve, reject) {
+            if (this.get("_token")) {
+                var host = this.get("_host"),
+                    token = this.get("_token");
+
+                $.ajax("%@/%@?access_token=%@".fmt(host, type, token), {
+                    type: "DELETE"
+                })
+                    .done(function(data, textStatus, jq_xhr) {
+                        resolve();
+                    })
+                    .fail(reject);
+            }
+            else {
+                reject();
+            }
+        }.bind(this));
+    },
+
+    update: function(type, params) {
+        return this.save(type, params, "PATCH");
     }
 });

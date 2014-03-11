@@ -60,3 +60,8 @@
     padding-left: 5px;
     cursor: move;
 }
+
+#column-list I.delete {
+    padding-left: 10px;
+    cursor: pointer;
+}

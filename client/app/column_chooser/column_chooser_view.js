@@ -8,6 +8,14 @@ Nimble.ColumnChooserView = Ember.View.extend({
         return [null, null, null];
     }.property("controller.existing_columns"),
 
+    click: function(e) {
+        var $target = $(e.target);
+
+        if ($target.hasClass("delete")) {
+            this._remove_column($target.closest("LI"));
+        }
+    },
+
     didInsertElement: function() {
         $("#columns-modal").modal("show")
             .on("hidden.bs.modal", function() {
@@ -21,6 +29,10 @@ Nimble.ColumnChooserView = Ember.View.extend({
         this.$("#column-list").sortable({
             handle: ".glyphicon-move"
         });
+    },
+
+    _remove_column: function($column) {
+        $column.remove();
     },
 
     actions: {
