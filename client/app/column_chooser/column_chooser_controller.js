@@ -12,7 +12,7 @@ Nimble.ColumnChooserController = Ember.ObjectController.extend({
 
         if (existing_column_names.length > 0) {
             (function() {
-                for (loop_idx = 0; loop_idx < new_names.length; loop_idx++) {
+                for (loop_idx = 0; loop_idx < existing_column_names.length; loop_idx++) {
                     var existing_name = existing_column_names[loop_idx],
                         new_name = new_names[loop_idx];
 
