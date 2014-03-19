@@ -1,9 +1,20 @@
 <section id="issues">
     <table class="table table-striped">
         <tr>
-            {{#each column_names}}
-                <th class="column-name">{{this}}</th>
+            {{#each columns}}
+                <th class="column-name">{{name}}</th>
             {{/each}}
         </tr>
+        {{#each issues}}
+            <tr>
+                {{#each this}}
+                    {{#if title}}
+                        <td>{{title}}:{{description}}</td>
+                    {{else}}
+                        <td>empty</td>
+                    {{/if}}
+                {{/each}}
+            </tr>
+        {{/each}}
     </table>
 </section>
