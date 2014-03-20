@@ -9,7 +9,7 @@
                 <ol id="column-list">
                     {{#each column in view.columns}}
                         <li class="list-input">
-                            <input type="text" {{bind-attr value="column"}}>
+                            <input type="text" {{bind-attr value="column.name"}}>
                             <i class="glyphicon glyphicon-move"></i>
                             <i class="delete glyphicon glyphicon-trash"></i>
                         </li>

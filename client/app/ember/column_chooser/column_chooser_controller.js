@@ -3,17 +3,17 @@ Nimble.ColumnChooserController = Ember.ObjectController.extend({
 
     save_columns: function(new_names) {
         var selected_repo = this.cache.get("selected_repo"),
-            existing_column_names = this.get("existing_columns"),
+            existing_columns = this.get("existing_columns"),
             to_update = [],
             to_delete = [],
             to_create = [],
             promises = [],
             loop_idx, save_promise;
 
-        if (existing_column_names.length > 0) {
+        if (existing_columns.length > 0) {
             (function() {
-                for (loop_idx = 0; loop_idx < existing_column_names.length; loop_idx++) {
-                    var existing_name = existing_column_names[loop_idx],
+                for (loop_idx = 0; loop_idx < existing_columns.length; loop_idx++) {
+                    var existing_name = existing_columns[loop_idx].name,
                         new_name = new_names[loop_idx];
 
                     if (existing_name !== new_name) {
@@ -27,14 +27,14 @@ Nimble.ColumnChooserController = Ember.ObjectController.extend({
             promises = promises.concat(this._rename_labels(to_update));
         }
 
-        if (existing_column_names.length > new_names.length) {
-            for (loop_idx = new_names.length; loop_idx < existing_column_names.length; loop_idx++) {
-                to_delete.push(this._column_to_label(loop_idx, existing_column_names[loop_idx]));
+        if (existing_columns.length > new_names.length) {
+            for (loop_idx = new_names.length; loop_idx < existing_columns.length; loop_idx++) {
+                to_delete.push(this._column_to_label(loop_idx, existing_columns[loop_idx].name));
             }
             promises = promises.concat(this._delete_labels(to_delete));
         }
-        else if (new_names.length > existing_column_names.length) {
-            for (loop_idx = existing_column_names.length; loop_idx < new_names.length; loop_idx++) {
+        else if (new_names.length > existing_columns.length) {
+            for (loop_idx = existing_columns.length; loop_idx < new_names.length; loop_idx++) {
                 to_create.push(this._column_to_label(loop_idx, new_names[loop_idx]));
             }
             promises = promises.concat(this._create_labels(to_create));
@@ -55,8 +55,8 @@ Nimble.ColumnChooserController = Ember.ObjectController.extend({
     },
 
     existing_columns: function() {
-        return this.get("controllers.issues.column_names");
-    }.property("controllers.issues.column_names"),
+        return this.get("controllers.issues.columns");
+    }.property("controllers.issues.columns"),
 
     _create_labels: function(names) {
         var selected_repo = this.cache.get("selected_repo"),

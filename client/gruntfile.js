@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         jshint: config("jshint"),
         emberTemplates: config("ember_templates"),
         watch: {
-            files: ["templates/**/*.hbs", "app.js", "app/**/*.js"],
+            files: ["templates/**/*.hbs", "app/ember/app.js", "app/ember/**/*.js"],
             tasks: ["emberTemplates", "concat"]
         }
     });
