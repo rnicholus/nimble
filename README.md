@@ -11,8 +11,9 @@ Planning documents will be maintained (at least initially) in the [wiki][wiki]. 
 The code for this project will be AGPL licensed.  Please see the [LICENSE file][license] for the leaglese.  
 
 
-NOTE: Work to switch the existing Ember code to Angular is being staged in the [angular branch][angular].  See #7 for details.
+NOTE: Work to switch the existing Ember code to Angular is being staged in the [angular branch][angular].  See [issue #7][7] for details.
 
+[7]: https://github.com/rnicholus/nimble/issues/7
 [angular]: https://github.com/rnicholus/nimble/tree/angular
 [api]: http://developer.github.com/v3/issues/
 [license]: LICENSE
