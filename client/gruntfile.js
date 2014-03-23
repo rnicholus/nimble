@@ -5,23 +5,22 @@ function config(name) {
 
 module.exports = function(grunt) {
     grunt.initConfig({
-        pkg: grunt.file.readJSON("package.json"),
         concat: config("concat"),
         jshint: config("jshint"),
-        emberTemplates: config("ember_templates"),
+        karma: config("karma"),
+        pkg: grunt.file.readJSON("package.json"),
         watch: {
-            files: ["templates/**/*.hbs", "app/ember/app.js", "app/ember/**/*.js"],
-            tasks: ["emberTemplates", "concat"]
+            files: ["app/**/*", "grunt_tasks/*", "test/**/*"],
+            tasks: ["jshint", "concat", "test"]
         }
     });
 
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-ember-templates");
     grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-karma");
 
-    grunt.registerTask("dist",
-        ["jshint", "emberTemplates", "concat"]);
-
-    grunt.registerTask("default", ["watch"]);
+    grunt.registerTask("default", ["dist", "test", "watch"]);
+    grunt.registerTask("dist", ["jshint", "concat"]);
+    grunt.registerTask("test", ["karma"]);
 };

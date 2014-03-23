@@ -40,5 +40,13 @@
     "shadow": false,
     "sub": true,
     "supernew": false,
-    "predef": ["Ember", "Nimble", "document", "$", "localStorage", "console", "window"]
+    "predef": [
+        "console",
+        "describe",
+        "document",
+        "expect",
+        "it",
+        "localStorage",
+        "window"
+    ]
 }

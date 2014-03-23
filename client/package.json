@@ -1,14 +1,23 @@
 {
-    "name": "nimble",
-    "version": "0.1.0",
+    "description": "Project management using Github issues",
     "devDependencies": {
         "grunt": "0.4.x",
         "grunt-contrib-concat": "0.3.x",
         "grunt-contrib-jshint": "0.8.x",
-        "handlebars": "1.3.x",
-        "ember-template-compiler": "1.4.0-beta.1",
-        "grunt-ember-templates": "0.4.x",
         "grunt-contrib-uglify": "0.2.x",
-        "grunt-contrib-watch": "0.5.x"
-    }
+        "grunt-contrib-watch": "0.5.x",
+        "grunt-karma": "~0.6.2",
+        "karma": "~0.10.9",
+        "karma-chrome-launcher": "~0.1.2",
+        "karma-firefox-launcher": "~0.1.3",
+        "karma-jasmine": "~0.1.5",
+        "karma-phantomjs-launcher": "~0.1.2",
+        "karma-script-launcher": "~0.1.0"
+    },
+    "name": "nimble",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/rnicholus/nimble.git"
+    },
+    "version": "0.2.0"
 }
