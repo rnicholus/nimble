@@ -1,7 +1,11 @@
 /* jshint node:true */
 module.exports = function(config){
     config.set({
+        autoWatch : false,
+
         basePath : "../",
+
+        browsers : ["Chrome"],
 
         files : [
             "app/lib/*",
@@ -10,17 +14,12 @@ module.exports = function(config){
             "test/unit/**/*.js"
         ],
 
-        autoWatch : false,
+        frameworks: ["jasmine"],
 
         singleRun: true,
 
-        frameworks: ["jasmine"],
-
-        browsers : ["Chrome"],
-
         plugins : [
             "karma-chrome-launcher",
-            "karma-firefox-launcher",
             "karma-jasmine"
         ]
     });
