@@ -1,7 +1,12 @@
 /* jshint node:true */
 /* globals module */
 module.exports = {
-    files: ["gruntfile.js", "js/**/*.js", "test/**/*.js"],
+    files: [
+        "app/js/**/*.js",
+        "grunt_tasks/*.js",
+        "gruntfile.js",
+        "test/unit/**/*.js"
+    ],
     options: {
         jshintrc: true
     }
