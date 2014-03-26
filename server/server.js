@@ -10,6 +10,7 @@ var token_endpoint = "/github/token",
     states = [];
 
 app.use(express.static("./client/"));
+app.use("/partials", express.static("./client/app/partials"));
 app.use(express.cookieParser());
 
 function check_valid_state(state) {

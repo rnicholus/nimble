@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         karma: config("karma"),
         pkg: grunt.file.readJSON("package.json"),
         watch: {
-            files: ["app/**/*", "grunt_tasks/*", "test/**/*"],
+            files: [".jshintrc", "app/**/*", "grunt_tasks/*", "test/**/*"],
             tasks: ["jshint", "concat", "test"]
         }
     });
