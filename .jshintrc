@@ -41,12 +41,14 @@
     "sub": true,
     "supernew": false,
     "predef": [
+        "angular",
         "console",
         "describe",
         "document",
         "expect",
         "it",
         "localStorage",
+        "nimbleModule",
         "window"
     ]
 }

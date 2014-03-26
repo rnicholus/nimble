@@ -8,7 +8,7 @@ module.exports = function(config){
         browsers : ["Chrome"],
 
         files : [
-            "app/lib/*",
+            "app/lib/*.js",
             "test/lib/angular/*",
             "app/js/**/*.js",
             "test/unit/**/*.js"

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="nimble">
 
 <head>
+    <meta charset="utf-8">
     <title>nimble</title>
 
     <link rel="stylesheet" href="app/css/main.css"/>
@@ -17,6 +18,13 @@
 </head>
 
 <body>
+    <div ng-controller="headerController">
+        <nimble-header></nimble-header>
+    </div>
+
+    <div ng-controller="issuesController">
+        <nimble-issues></nimble-issues>
+    </div>
 </body>
 
 </html>
