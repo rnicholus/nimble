@@ -1,0 +1,15 @@
+<span ng-switch on="loggedIn">
+    <ul ng-switch-when="true" class="dropdown">
+        <img class="avatar dropdown-toggle" id="user_menu" data-toggle="dropdown" ng-src="{{avatarUrl}}">
+        <span class="caret"></span>
+        <ul class="dropdown-menu">
+            <li>
+                <button ng-click="logout()" class="btn btn-link">Logout</button>
+            </li>
+        </ul>
+    </ul>
+
+    <button ng-switch-when="false" id="login-button" class="btn btn-primary" ng-click="login()">
+        Login
+    </button>
+</span>
