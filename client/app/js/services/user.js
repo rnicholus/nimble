@@ -13,9 +13,19 @@ nimbleModule.factory("user", ["$http", "$q", function($http, $q) {
         },
 
         logout: function() {
-            return $http.delete(tokenUrl).success(function() {
+            var deferred = $q.defer();
+
+            $http.delete(tokenUrl)
+            .success(function() {
                 token = null;
+                deferred.resolve();
+            })
+            .error(function(data, status) {
+                console.error("Could not log out user due to server error.");
+                deferred.reject({status: status});
             });
+
+            return deferred.promise;
         },
 
         // TODO Move most of this to a new "github API" service
@@ -29,6 +39,8 @@ nimbleModule.factory("user", ["$http", "$q", function($http, $q) {
                 }
             }).success(function(data) {
                 deferred.resolve(data);
+            }).error(function(data, status) {
+                deferred.reject({status: status});
             });
 
             return deferred.promise;
