@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-build.2491+sha.635cdaa
+ * @license AngularJS v1.3.0-beta.4
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -571,7 +571,7 @@
             }
             date.setUTCFullYear(int(match[1]), int(match[2]) - 1, int(match[3]));
             date.setUTCHours(int(match[4]||0) - tzHour,
-                int(match[5]||0) - tzMin,
+                    int(match[5]||0) - tzMin,
                 int(match[6]||0),
                 int(match[7]||0));
             return date;
@@ -1097,12 +1097,12 @@
             responsesPush = angular.bind(responses, responses.push),
             copy = angular.copy;
 
-        function createResponse(status, data, headers) {
+        function createResponse(status, data, headers, statusText) {
             if (angular.isFunction(status)) return status;
 
             return function() {
                 return angular.isNumber(status)
-                    ? [status, data, headers]
+                    ? [status, data, headers, statusText]
                     : [200, status, data];
             };
         }
@@ -1127,7 +1127,8 @@
                 function handleResponse() {
                     var response = wrapped.response(method, url, data, headers);
                     xhr.$$respHeaders = response[2];
-                    callback(copy(response[0]), copy(response[1]), xhr.getAllResponseHeaders());
+                    callback(copy(response[0]), copy(response[1]), xhr.getAllResponseHeaders(),
+                        copy(response[3] || ''));
                 }
 
                 function handleTimeout() {
@@ -1195,16 +1196,17 @@
          *   request is handled.
          *
          *  - respond â€“
-         *      `{function([status,] data[, headers])|function(function(method, url, data, headers)}`
-         *    â€“ The respond method takes a set of static data to be returned or a function that can return
-         *    an array containing response status (number), response data (string) and response headers
-         *    (Object).
+         *      `{function([status,] data[, headers, statusText])
+   *      | function(function(method, url, data, headers)}`
+         *    â€“ The respond method takes a set of static data to be returned or a function that can
+         *    return an array containing response status (number), response data (string), response
+         *    headers (Object), and the text for the status (string).
          */
         $httpBackend.when = function(method, url, data, headers) {
             var definition = new MockHttpExpectation(method, url, data, headers),
                 chain = {
-                    respond: function(status, data, headers) {
-                        definition.response = createResponse(status, data, headers);
+                    respond: function(status, data, headers, statusText) {
+                        definition.response = createResponse(status, data, headers, statusText);
                     }
                 };
 
@@ -1319,17 +1321,18 @@
          *  request is handled.
          *
          *  - respond â€“
-         *    `{function([status,] data[, headers])|function(function(method, url, data, headers)}`
-         *    â€“ The respond method takes a set of static data to be returned or a function that can return
-         *    an array containing response status (number), response data (string) and response headers
-         *    (Object).
+         *    `{function([status,] data[, headers, statusText])
+   *    | function(function(method, url, data, headers)}`
+         *    â€“ The respond method takes a set of static data to be returned or a function that can
+         *    return an array containing response status (number), response data (string), response
+         *    headers (Object), and the text for the status (string).
          */
         $httpBackend.expect = function(method, url, data, headers) {
             var expectation = new MockHttpExpectation(method, url, data, headers);
             expectations.push(expectation);
             return {
-                respond: function(status, data, headers) {
-                    expectation.response = createResponse(status, data, headers);
+                respond: function (status, data, headers, statusText) {
+                    expectation.response = createResponse(status, data, headers, statusText);
                 }
             };
         };
@@ -1755,10 +1758,10 @@
         $httpBackend: angular.mock.$HttpBackendProvider,
         $rootElement: angular.mock.$RootElementProvider
     }).config(['$provide', function($provide) {
-            $provide.decorator('$timeout', angular.mock.$TimeoutDecorator);
-            $provide.decorator('$$rAF', angular.mock.$RAFDecorator);
-            $provide.decorator('$$asyncCallback', angular.mock.$AsyncCallbackDecorator);
-        }]);
+        $provide.decorator('$timeout', angular.mock.$TimeoutDecorator);
+        $provide.decorator('$$rAF', angular.mock.$RAFDecorator);
+        $provide.decorator('$$asyncCallback', angular.mock.$AsyncCallbackDecorator);
+    }]);
 
     /**
      * @ngdoc module
@@ -1840,13 +1843,14 @@
      *   control how a matched request is handled.
      *
      *  - respond â€“
-     *    `{function([status,] data[, headers])|function(function(method, url, data, headers)}`
+     *    `{function([status,] data[, headers, statusText])
+ *    | function(function(method, url, data, headers)}`
      *    â€“ The respond method takes a set of static data to be returned or a function that can return
-     *    an array containing response status (number), response data (string) and response headers
-     *    (Object).
-     *  - passThrough â€“ `{function()}` â€“ Any request matching a backend definition with `passThrough`
-     *    handler will be passed through to the real backend (an XHR request will be made to the
-     *    server.)
+     *    an array containing response status (number), response data (string), response headers
+     *    (Object), and the text for the status (string).
+     *  - passThrough â€“ `{function()}` â€“ Any request matching a backend definition with
+     *    `passThrough` handler will be passed through to the real backend (an XHR request will be made
+     *    to the server.)
      */
 
     /**
