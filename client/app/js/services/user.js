@@ -18,11 +18,16 @@ nimbleModule.factory("user", ["$http", "$q", function($http, $q) {
             });
         },
 
+        // TODO Move most of this to a new "github API" service
         getInfo: function() {
             var host = "https://api.github.com",
                 deferred = $q.defer();
 
-            $http.get(host + "/user?access_token=" + token).success(function(data) {
+            $http.get(host + "/user", {
+                params: {
+                    access_token: token
+                }
+            }).success(function(data) {
                 deferred.resolve(data);
             });
 
