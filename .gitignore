@@ -1,4 +1,4 @@
 node_modules
 github_oauth_data.json
 .idea
-client/dist
+dist
