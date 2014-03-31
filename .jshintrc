@@ -18,7 +18,6 @@
     "unused": false,
     "strict": false,
     "trailing": false,
-    "maxparams": 3,
     "maxdepth": 3,
     "asi": false,
     "boss": false,
