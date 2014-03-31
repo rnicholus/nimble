@@ -20,7 +20,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-karma");
 
-    grunt.registerTask("default", ["dist", "test", "watch"]);
+    grunt.registerTask("default", ["dist", "karma:dev", "watch"]);
     grunt.registerTask("dist", ["jshint", "concat"]);
-    grunt.registerTask("test", ["karma"]);
+    grunt.registerTask("travis", ["dist", "karma:travis"]);
+
 };
