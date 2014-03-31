@@ -1,6 +1,7 @@
 {
     "description": "Project management using Github issues",
     "devDependencies": {
+        "express": "3.x",
         "grunt": "0.4.x",
         "grunt-contrib-concat": "0.3.x",
         "grunt-contrib-jshint": "0.8.x",
@@ -12,7 +13,10 @@
         "karma-firefox-launcher": "~0.1.3",
         "karma-jasmine": "~0.2.0",
         "karma-phantomjs-launcher": "~0.1.2",
-        "karma-script-launcher": "~0.1.0"
+        "karma-script-launcher": "~0.1.0",
+        "node-uuid": "1.4.1",
+        "node-promise": "0.5.10",
+        "request": "2.33.0"
     },
     "name": "nimble",
     "repository": {
