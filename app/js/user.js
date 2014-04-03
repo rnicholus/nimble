@@ -27,50 +27,34 @@ nimbleModule.controller("userController", ["$scope", "user",
         };
     })
 
-    .factory("user", ["$http", "$q", function($http, $q) {
-        var tokenUrl = "/github/token",
-            token = document.cookie.replace(
-                /(?:(?:^|.*;\s*)github_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    .factory("user", ["github", "token", "$http", "$q",
+        function(github, token, $http, $q) {
+
+        var authUrl = "/github/token";
 
         return {
+            getInfo: github.getUser,
+
             isLoggedIn: function() {
-                return !!token;
+                return !!token.get();
             },
 
             login: function() {
-                window.location = tokenUrl;
+                window.location = authUrl;
             },
 
             logout: function() {
                 var deferred = $q.defer();
 
-                $http.delete(tokenUrl)
+                $http.delete(authUrl)
                     .success(function() {
-                        token = null;
+                        token.clear();
                         deferred.resolve();
                     })
                     .error(function(data, status) {
                         console.error("Could not log out user due to server error.");
                         deferred.reject({status: status});
                     });
-
-                return deferred.promise;
-            },
-
-            // TODO Move most of this to a new "github API" service
-            getInfo: function() {
-                var host = "https://api.github.com",
-                    deferred = $q.defer();
-
-                $http.get(host + "/user", {
-                    params: {
-                        access_token: token
-                    }
-                }).success(function(data) {
-                    deferred.resolve(data);
-                }).error(function(data, status) {
-                    deferred.reject({status: status});
-                });
 
                 return deferred.promise;
             }
