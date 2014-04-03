@@ -40,14 +40,19 @@
     "sub": true,
     "supernew": false,
     "predef": [
+        "afterEach",
         "angular",
+        "beforeEach",
         "console",
         "describe",
         "document",
         "expect",
+        "inject",
         "it",
         "localStorage",
+        "module",
         "nimbleModule",
+        "spyOn",
         "window"
     ]
 }

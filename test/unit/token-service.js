@@ -1,4 +1,3 @@
-/* globals beforeEach, inject, module */
 describe("Token service", function() {
     var tokenService;
 

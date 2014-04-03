@@ -1,4 +1,3 @@
-/* globals beforeEach, afterEach, inject, module, spyOn */
 describe("Github API service", function() {
     var githubApiUrl = "https://api.github.com",
         httpBackend, githubService,
