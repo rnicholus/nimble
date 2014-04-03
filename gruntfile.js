@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
         watch: {
             files: [".jshintrc", "app/**/*", "grunt_tasks/*", "test/**/*"],
-            tasks: ["jshint", "concat", "test"]
+            tasks: ["jshint", "concat", "karma:dev"]
         }
     });
 
