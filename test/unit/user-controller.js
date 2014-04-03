@@ -1,4 +1,3 @@
-/* globals beforeEach, afterEach, inject, module, spyOn */
 describe("User service", function() {
     var controller, q, scope, timeout;
 
