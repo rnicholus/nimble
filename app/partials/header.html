@@ -10,32 +10,12 @@
             </ul>
         </div>
 
-        <!--<ul id="repo-menu" class="dropdown text-center nav navbar-nav">-->
-            <!--<div class="dropdown-toggle" data-toggle="dropdown">-->
-                <!--<span class="repo-name">-->
-                    <!--{{controllers.repo_chooser.current_name}}-->
-                    <!--<span {{bind-attr class="controllers.repo_chooser.current_name:caret"}}></span>-->
-                <!--</span>-->
-                <!--<span data-container="body"-->
-                      <!--data-toggle="popover" data-placement="bottom"-->
-                      <!--data-html="true"-->
-                      <!--data-content="<button id='close-repo-chooser-popover' class='close'>x</button><div>Click here at any time to select a new repo.</div>">-->
-              <!--</span>-->
-            <!--</div>-->
-            <!--<ul class="dropdown-menu">-->
-                <!--<li>-->
-                    <!--<button {{action open_modal "repo_chooser"}}-->
-                    <!--class="btn btn-link">-->
-                    <!--Change Repo-->
-                    <!--</button>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<button {{action open_modal "column_chooser"}}-->
-                    <!--class="btn btn-link">-->
-                    <!--Edit Columns-->
-                    <!--</button>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</ul>-->
+        <ul id="repo-menu"
+            ng-controller="repoMenuController"
+            class="dropdown text-center nav navbar-nav">
+
+            <ng-include src="'/partials/repo-menu.html'"></ng-include>
+
+        </ul>
     </div>
 </header>

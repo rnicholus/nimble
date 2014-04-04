@@ -19,9 +19,7 @@
 </head>
 
 <body>
-    <div ng-controller="headerController">
-        <nimble-header></nimble-header>
-    </div>
+    <ng-include src="'/partials/header.html'"></ng-include>
 
     <div ng-controller="issuesController">
         <nimble-issues></nimble-issues>

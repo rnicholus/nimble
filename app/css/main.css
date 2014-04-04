@@ -69,3 +69,7 @@
 #issues .column-name {
     text-align: center;
 }
+
+.tab-pane {
+    padding-top: 10px;
+}

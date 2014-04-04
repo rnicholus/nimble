@@ -1,4 +1,4 @@
-describe("User service", function() {
+describe("User controller", function() {
     var controller, q, scope, timeout;
 
     beforeEach(function() {
