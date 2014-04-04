@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title">Choose a Repo</h4>
+</div>
+<div class="modal-body">
+    <tabset justified="true">
+        <tab ng-repeat="repo in repos" heading="{{repo.type}}">
+            <ul class="no-bullet">
+                <li ng-repeat="entry in repo.entries">
+                    <a class="pointer" ng-click="ok(entry)">
+                        {{entry.name}}
+                    </a>
+                </li>
+            </ul>
+        </tab>
+    </tabset>
+</div>
