@@ -43,9 +43,12 @@ exports.delete = function(oauth_config, token) {
             }
         };
 
-    request.del("https://api.github.com/applications/" +
-        user + "/tokens/" + token, callback)
-        .auth(user, pass);
+    request.del("https://api.github.com/applications/" + user + "/tokens/" + token, {
+        auth: {
+            user: user,
+            pass: pass
+        }
+    }, callback);
 
     return promise;
 };
