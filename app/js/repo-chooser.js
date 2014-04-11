@@ -19,22 +19,27 @@ var repoChooserInstanceController = function($scope, $modalInstance, github) {
     $scope.close = $modalInstance.dismiss;
     $scope.ok = $modalInstance.close;
 
-    $scope.repos = [
-        {type: "all", entries: []},
-        {type: "public", entries: []},
-        {type: "private", entries: []}
-    ];
+    $scope.repos = [];
 
+    // Ensure spinner is displayed or, preferrably, ensure this data is loaded/cached much earlier
     github.getRepos().then(function(allRepos) {
-        $scope.repos[0].entries = sorted(allRepos);
+        $scope.repos.push({type: "all", entries: sorted(allRepos)});
 
-        $scope.repos[1].entries = sorted(allRepos.filter(function(repo) {
-            return !repo.private;
-        }));
+        $scope.repos.push({type: "public",
+            entries: sorted(allRepos.filter(
+                function(repo) {
+                    return !repo.private;
+                }
+            ))
+        });
 
-        $scope.repos[2].entries = sorted(allRepos.filter(function(repo) {
-            return repo.private;
-        }));
+        $scope.repos.push({type: "private",
+            entries: sorted(allRepos.filter(
+                function(repo) {
+                    return repo.private;
+                }
+            ))
+        });
     });
 };
 
