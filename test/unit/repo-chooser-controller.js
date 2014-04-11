@@ -28,7 +28,7 @@ describe("Repo menu controller", function() {
         scope.open();
 
         expect(modal.open).toHaveBeenCalled();
-        deferred.resolve({name: "newSelectedRepo"});
+        deferred.resolve({full_name: "newSelectedRepo"});
         scope.$root.$digest();
         expect(user.selectedRepoName).toEqual("newSelectedRepo");
     });

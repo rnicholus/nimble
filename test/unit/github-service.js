@@ -21,7 +21,7 @@ describe("Github API service", function() {
     });
 
     it("grabs the metadata for the user", function() {
-        httpBackend.expectGET(githubApiUrl + "/user?access_token=test")
+        httpBackend.expectGET(githubApiUrl + "/user?access_token=test&per_page=100")
             .respond({id: 1});
 
         githubService.getUser().then(function(data) {
@@ -32,7 +32,7 @@ describe("Github API service", function() {
     });
 
     it("handles a failure to get user metadata", function() {
-        httpBackend.expectGET(githubApiUrl + "/user?access_token=test")
+        httpBackend.expectGET(githubApiUrl + "/user?access_token=test&per_page=100")
             .respond(404);
 
         githubService.getUser().then(function(data) {},
