@@ -22,6 +22,7 @@ var repoChooserInstanceController = function($scope, $modalInstance, repos) {
     $scope.typedRepos = [];
 
     // TODO Ensure spinner is displayed or, preferrably, ensure this data is loaded/cached much earlier
+    // TODO handle request failure by displaying bootstrap alert
     repos.get().then(function(groupedRepos) {
         groupedRepos.forEach(function(reposGroup) {
             sort(reposGroup.repos);
@@ -35,7 +36,7 @@ nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user", "g
         $scope.open = function() {
             var modalInstance = $modal.open({
                 controller: repoChooserInstanceController,
-                templateUrl: "/partials/repo-chooser.html"
+                templateUrl: "src/repo/repo-chooser.html"
             });
 
             modalInstance.result.then(function(newRepo) {

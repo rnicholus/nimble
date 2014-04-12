@@ -47,7 +47,6 @@ describe("Repo menu controller", function() {
             repos: reposSvc
         });
 
-
         getReposDeferred.resolve([
             {type: "type1", repos: [{full_name: "b"}, {full_name: "a"}, {full_name: "c"}]},
             {type: "type2", repos: [{full_name: "nicholus"}, {full_name: "ray"}]}
