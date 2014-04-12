@@ -24,7 +24,7 @@ describe("Github API service", function() {
         httpBackend.expectGET(githubApiUrl + "/user?access_token=test&per_page=100")
             .respond({id: 1});
 
-        githubService.getUser().then(function(data) {
+        githubService.getAuthenticatedUser().then(function(data) {
             expect(data).toEqual({id: 1});
         });
 
@@ -35,10 +35,26 @@ describe("Github API service", function() {
         httpBackend.expectGET(githubApiUrl + "/user?access_token=test&per_page=100")
             .respond(404);
 
-        githubService.getUser().then(function(data) {},
+        githubService.getAuthenticatedUser().then(function(data) {},
             function(reason) {
                 expect(reason).toEqual({status: 404});
             });
+
+        httpBackend.flush();
+    });
+
+    it("gets all pages of repo results", function() {
+        httpBackend.expectGET(githubApiUrl + "/user/repos?access_token=test&per_page=100")
+            .respond([1,2,3], {
+                Link: "<http://page1.com>; rel=\"next\""
+            });
+
+        httpBackend.expectGET("http://page1.com")
+            .respond([4,5,6]);
+
+        githubService.listYourRepos().then(function(data) {
+            expect(data).toEqual([1,2,3,4,5,6]);
+        });
 
         httpBackend.flush();
     });
