@@ -49,6 +49,7 @@
         "expect",
         "inject",
         "it",
+        "jasmine",
         "localStorage",
         "module",
         "nimbleModule",

@@ -21,7 +21,7 @@ var repoChooserInstanceController = function($scope, $modalInstance, repos) {
 
     $scope.typedRepos = [];
 
-    // Ensure spinner is displayed or, preferrably, ensure this data is loaded/cached much earlier
+    // TODO Ensure spinner is displayed or, preferrably, ensure this data is loaded/cached much earlier
     repos.get().then(function(groupedRepos) {
         groupedRepos.forEach(function(reposGroup) {
             sort(reposGroup.repos);
