@@ -33,7 +33,7 @@ nimbleModule.controller("userController", ["$scope", "user",
         var authUrl = "/github/token";
 
         return {
-            get: github.getUser,
+            get: github.getAuthenticatedUser,
 
             isLoggedIn: function() {
                 return !!token.get();
