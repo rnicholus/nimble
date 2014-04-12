@@ -13,7 +13,7 @@ nimbleModule.controller("userController", ["$scope", "user",
         });
 
         if ($scope.loggedIn) {
-            user.getInfo().then(function(info) {
+            user.get().then(function(info) {
                 $scope.avatarUrl = info.avatar_url;
             });
         }
@@ -33,7 +33,7 @@ nimbleModule.controller("userController", ["$scope", "user",
         var authUrl = "/github/token";
 
         return {
-            getInfo: github.getUser,
+            get: github.getUser,
 
             isLoggedIn: function() {
                 return !!token.get();
