@@ -1,6 +1,6 @@
-var repoChooserInstanceController = function($scope, $modalInstance, github) {
-    function sorted(repos) {
-        repos.sort(function(a, b) {
+var repoChooserInstanceController = function($scope, $modalInstance, repos) {
+    function sort(reposArray) {
+        reposArray.sort(function(a, b) {
             var aName = a.full_name.toLowerCase(),
                 bName = b.full_name.toLowerCase();
 
@@ -13,32 +13,19 @@ var repoChooserInstanceController = function($scope, $modalInstance, github) {
             return 0;
         });
 
-        return repos;
+        return reposArray;
     }
 
     $scope.close = $modalInstance.dismiss;
     $scope.ok = $modalInstance.close;
 
-    $scope.repos = [];
+    $scope.typedRepos = [];
 
     // Ensure spinner is displayed or, preferrably, ensure this data is loaded/cached much earlier
-    github.getRepos().then(function(allRepos) {
-        $scope.repos.push({type: "all", entries: sorted(allRepos)});
-
-        $scope.repos.push({type: "public",
-            entries: sorted(allRepos.filter(
-                function(repo) {
-                    return !repo.private;
-                }
-            ))
-        });
-
-        $scope.repos.push({type: "private",
-            entries: sorted(allRepos.filter(
-                function(repo) {
-                    return repo.private;
-                }
-            ))
+    repos.get().then(function(groupedRepos) {
+        groupedRepos.forEach(function(reposGroup) {
+            sort(reposGroup.repos);
+            $scope.typedRepos.push(reposGroup);
         });
     });
 };

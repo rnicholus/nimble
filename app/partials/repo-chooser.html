@@ -4,11 +4,11 @@
 </div>
 <div class="modal-body">
     <tabset justified="true">
-        <tab ng-repeat="repo in repos" heading="{{repo.type}}">
+        <tab ng-repeat="reposEntry in typedRepos" heading="{{reposEntry.type}}">
             <ul class="no-bullet">
-                <li ng-repeat="entry in repo.entries">
-                    <a class="pointer" ng-click="ok(entry)">
-                        {{entry.full_name}}
+                <li ng-repeat="repo in reposEntry.repos">
+                    <a class="pointer" ng-click="ok(repo)">
+                        {{repo.full_name}}
                     </a>
                 </li>
             </ul>

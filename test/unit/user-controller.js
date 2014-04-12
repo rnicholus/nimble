@@ -28,7 +28,7 @@ describe("User controller", function() {
             $scope: scope,
             user: {
                 isLoggedIn: function() {return true;},
-                getInfo: function() {
+                get: function() {
                     var deferred = q.defer();
                     deferred.resolve({avatar_url: "http://garstasio.com"});
                     return deferred.promise;
@@ -45,7 +45,7 @@ describe("User controller", function() {
             $scope: scope,
             user: {
                 isLoggedIn: function() {return true;},
-                getInfo: function() {
+                get: function() {
                     var deferred = q.defer();
                     deferred.resolve({avatar_url: "http://garstasio.com"});
                     return deferred.promise;
