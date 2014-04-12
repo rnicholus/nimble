@@ -23,7 +23,7 @@ nimbleModule.controller("userController", ["$scope", "user",
     .directive("nimbleUser", function() {
         return {
             restrict: "E",
-            templateUrl: "/partials/user.html"
+            templateUrl: "src/user/user.html"
         };
     })
 

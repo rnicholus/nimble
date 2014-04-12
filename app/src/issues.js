@@ -4,6 +4,6 @@ nimbleModule.controller("issuesController", function($scope) {
 .directive("NimbleIssues", function() {
     return {
         restrict: "E",
-        templateUrl: "/partials/issues.html"
+        templateUrl: "src/issues.html"
     };
 });
