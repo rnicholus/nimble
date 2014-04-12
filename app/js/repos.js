@@ -3,7 +3,7 @@ nimbleModule.factory("repos", ["github", "user", "$q",
 
     var getAllRepos = function () {
             var deferred = $q.defer(),
-                userReposPromise = github.listUserRepos();
+                userReposPromise = github.listYourRepos();
 
             user.get().then(
                 function success(userInfo) {

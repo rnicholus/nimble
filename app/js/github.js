@@ -89,7 +89,7 @@ nimbleModule.factory("github", ["token", "$http", "$q",
             return callApi("users/" + user.login + "/orgs");
         },
 
-        listUserRepos: function() {
+        listYourRepos: function() {
             return callApi("user/repos");
         },
 
