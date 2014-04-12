@@ -58,4 +58,26 @@ describe("Github API service", function() {
 
         httpBackend.flush();
     });
+
+    it("gets list of user orgs", function() {
+        httpBackend.expectGET(githubApiUrl + "/users/rnicholus/orgs?access_token=test&per_page=100")
+            .respond(["garstasio"]);
+
+        githubService.listUserOrgs({login: "rnicholus"}).then(function(data) {
+            expect(data).toEqual(["garstasio"]);
+        });
+
+        httpBackend.flush();
+    });
+
+    it("gets list of org repos", function() {
+        httpBackend.expectGET(githubApiUrl + "/orgs/garstasio/repos?access_token=test&per_page=100")
+            .respond(["one", "two"]);
+
+        githubService.listOrgRepos({login: "garstasio"}).then(function(data) {
+            expect(data).toEqual(["one", "two"]);
+        });
+
+        httpBackend.flush();
+    });
 });
