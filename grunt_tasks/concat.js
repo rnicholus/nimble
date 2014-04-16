@@ -5,7 +5,7 @@ module.exports = {
         separator: "\n"
     },
     dist: {
-        src: ["app/src/app.js", "app/src/**/*.js", "app/lib/**/*.js"],
+        src: ["app/src/app.js", "app/src/**/*.js"],
         dest: "app/dist/<%= pkg.name %>.js"
     }
 };
