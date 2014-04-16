@@ -1,14 +1,15 @@
 describe("Repo menu controller", function() {
-    var controller, q, scope, modalInstance, reposSvc;
+    var controller, q, scope, modalInstance, reposSvc, location;
 
     beforeEach(function() {
         module("nimble");
-        inject(function($rootScope, $controller, $q, repos) {
+        inject(function($rootScope, $controller, $q, repos, $location) {
             scope = $rootScope.$new();
             controller = $controller;
             q = $q;
             modalInstance = jasmine.createSpyObj("modalInstance", ["close", "dismiss"]);
             reposSvc = repos;
+            location = $location;
         });
     });
 
@@ -56,5 +57,34 @@ describe("Repo menu controller", function() {
             {type: "type1", repos: [{full_name: "a"}, {full_name: "b"}, {full_name: "c"}]},
             {type: "type2", repos: [{full_name: "nicholus"}, {full_name: "ray"}]}
         ]);
+    });
+
+    it("responds to a repo name in the URL", function() {
+        var user = {
+            selectedRepoName: null
+        };
+
+        controller("repoChooserController", {
+            $scope: scope,
+            $modal: null,
+            user: user,
+            $location: location
+        });
+
+        location.path("/repos/foo/bar");
+        scope.$root.$digest();
+        expect(user.selectedRepoName).toEqual("foo/bar");
+
+        location.path("/path1/path2/path3");
+        scope.$root.$digest();
+        expect(user.selectedRepoName).toEqual("foo/bar");
+
+        location.path("/repos/organization");
+        scope.$root.$digest();
+        expect(user.selectedRepoName).toEqual("foo/bar");
+
+        location.path("/repos/organization/reponame");
+        scope.$root.$digest();
+        expect(user.selectedRepoName).toEqual("organization/reponame");
     });
 });

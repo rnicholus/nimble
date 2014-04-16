@@ -31,8 +31,22 @@ var repoChooserInstanceController = function($scope, $modalInstance, repos) {
     });
 };
 
-nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user", "github",
-    function($scope, $modal, user) {
+nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user", "$location",
+    function($scope, $modal, user, $location) {
+
+        $scope.$watch(function() {
+            return $location.path();
+        },
+        function(path) {
+            if (path.indexOf("/repos/") === 0) {
+                var repoSegment = path.substr(7);
+
+                if (repoSegment.split("/").length === 2) {
+                    user.selectedRepoName = repoSegment;
+                }
+            }
+        });
+
         $scope.open = function() {
             var modalInstance = $modal.open({
                 controller: repoChooserInstanceController,
