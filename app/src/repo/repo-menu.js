@@ -4,7 +4,7 @@ nimbleModule.controller("repoMenuController", ["$scope", "user",
 
         $scope.$watch(function() {return user.selectedRepoName;},
             function(selectedRepoName) {
-                $scope.name = selectedRepoName;
+                $scope.name = selectedRepoName || "Please Select a Repo";
             }
         );
     }]);
