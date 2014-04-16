@@ -59,7 +59,6 @@ nimbleModule.controller("userController", ["$scope", "user",
                 return deferred.promise;
             },
 
-            // TODO better default value?
-            selectedRepoName: "someOrg/someRepo"
+            selectedRepoName: null
         };
     }]);
