@@ -7,6 +7,7 @@ module.exports = {
         basePath : ".",
 
         files : [
+            "app/lib/angular.js",
             "app/lib/**/*.js",
             "test/lib/angular/*",
             "app/src/**/*.js",

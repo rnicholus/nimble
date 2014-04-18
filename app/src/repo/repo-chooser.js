@@ -1,4 +1,4 @@
-var repoChooserInstanceController = function($scope, $modalInstance, repos) {
+var repoChooserInstanceController = function($scope, $modalInstance, repos, promiseTracker) {
     function sort(reposArray) {
         reposArray.sort(function(a, b) {
             var aName = a.full_name.toLowerCase(),
@@ -21,14 +21,13 @@ var repoChooserInstanceController = function($scope, $modalInstance, repos) {
 
     $scope.typedRepos = [];
 
-    // TODO Ensure spinner is displayed or, preferrably, ensure this data is loaded/cached much earlier
     // TODO handle request failure by displaying bootstrap alert
-    repos.get().then(function(groupedRepos) {
+    promiseTracker("getrepos").addPromise(repos.get().then(function(groupedRepos) {
         groupedRepos.forEach(function(reposGroup) {
             sort(reposGroup.repos);
             $scope.typedRepos.push(reposGroup);
         });
-    });
+    }));
 };
 
 nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user", "$location",
