@@ -23,7 +23,6 @@ nimbleModule.factory("systemAlert", ["$rootScope", function($rootScope) {
             }
 
             alertTimeoutPromise = $timeout(function() {
-                console.log("hmmmm");
                 alertTimeoutPromise = null;
                 $scope.active = false;
             }, 10000);
