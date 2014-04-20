@@ -1,4 +1,4 @@
-var repoChooserInstanceController = function($scope, $modalInstance, repos, promiseTracker) {
+var repoChooserInstanceController = function($scope, $modalInstance, repos, promiseTracker, systemAlert) {
     function sort(reposArray) {
         reposArray.sort(function(a, b) {
             var aName = a.full_name.toLowerCase(),
@@ -21,13 +21,18 @@ var repoChooserInstanceController = function($scope, $modalInstance, repos, prom
 
     $scope.typedRepos = [];
 
-    // TODO handle request failure by displaying bootstrap alert
-    promiseTracker("getrepos").addPromise(repos.get().then(function(groupedRepos) {
-        groupedRepos.forEach(function(reposGroup) {
-            sort(reposGroup.repos);
-            $scope.typedRepos.push(reposGroup);
-        });
-    }));
+    promiseTracker("getrepos").addPromise(repos.get().then(
+        function success(groupedRepos) {
+            groupedRepos.forEach(function(reposGroup) {
+                sort(reposGroup.repos);
+                $scope.typedRepos.push(reposGroup);
+            });
+        },
+
+        function failure() {
+            systemAlert.show("error", "Problem retrieving repository list");
+        }
+    ));
 };
 
 nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user", "$location",
