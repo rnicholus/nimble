@@ -55,7 +55,6 @@ describe("Repos service", function() {
         this.$rootScope.$digest();
         expect(getReposPromiseResolved).toBe(true);
         expect(repoGroups.length).toEqual(3);
-        console.log(repoGroups[0].repos);
         repoGroups.forEach(function(repoGroup) {
             if (repoGroup.type === "private") {
                 expect(repoGroup.repos).toEqual([
