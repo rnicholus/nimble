@@ -14,7 +14,7 @@
             ng-controller="repoMenuController"
             class="dropdown text-center nav navbar-nav">
 
-            <ng-include src="'src/repo/repo-menu.html'"></ng-include>
+            <ng-include src="'src/repo/repo-menu.html'" ng-if="loggedIn"></ng-include>
 
         </ul>
     </div>
