@@ -10,6 +10,7 @@ module.exports = {
             "app/lib/angular.js",
             "app/lib/**/*.js",
             "test/lib/angular/*",
+            "app/src/app.js",
             "app/src/**/*.js",
             "test/unit/**/*.js"
         ],
