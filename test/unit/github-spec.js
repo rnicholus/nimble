@@ -80,4 +80,28 @@ describe("Github API service", function() {
 
         httpBackend.flush();
     });
+
+    it("gets list of labels for a specific repo", function() {
+        var labelsResponse = [
+            {
+                color: "fc2929",
+                name: "one",
+                url: "https://api.github.com/repos/garstasio/foobar/labels/one"
+            },
+            {
+                color: "fc2929",
+                name: "two",
+                url: "https://api.github.com/repos/garstasio/foobar/labels/two"
+            }
+        ];
+
+        httpBackend.expectGET(githubApiUrl + "/repos/garstasio/foobar/labels?access_token=test&per_page=100")
+            .respond(labelsResponse);
+
+        githubService.listAllLabels("garstasio/foobar").then(function(data) {
+            expect(data).toEqual(labelsResponse);
+        });
+
+        httpBackend.flush();
+    });
 });

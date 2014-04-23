@@ -1,9 +1,8 @@
 nimbleModule.controller("issuesController", function($scope) {
-    $scope.todoMsg = "TODO";
 })
-.directive("NimbleIssues", function() {
+.directive("nimbleIssues", function() {
     return {
         restrict: "E",
-        templateUrl: "src/issues.html"
+        templateUrl: "src/issue/issues.html"
     };
 });

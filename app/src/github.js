@@ -81,6 +81,10 @@ nimbleModule.factory("github", ["token", "$http", "$q",
 
 
     return {
+        listAllLabels: function(fullRepoName) {
+            return callApi("repos/" + fullRepoName + "/labels");
+        },
+
         listOrgRepos: function(org) {
             return callApi("orgs/" + org.login + "/repos");
         },
