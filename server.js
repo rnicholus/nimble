@@ -62,6 +62,7 @@ app.get("/github/gotauth", function(req, res) {
 
         github_token.get(oauth_data, code).then(function(token) {
             console.log("Retrieved token: " + token);
+            // TODO use 30-day persistent cookie if user selects "remember me"
             res.cookie(cookie_name, token)
                 .redirect("/");
         },
