@@ -1,3 +1,4 @@
+// TODO ensure alert is displayed if repos can't be retrieved
 describe("Repo menu controller", function() {
     var controller, q, scope, modalInstance, reposSvc, location;
 
