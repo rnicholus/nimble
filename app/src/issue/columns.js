@@ -7,7 +7,6 @@ nimbleModule.controller("columnsController", ["$scope", "columns",
             }
         );
     }])
-    // TODO handle 410 on listAllLabels (issues not enabled)
     .factory("columns", ["$rootScope", "user", "github", function($rootScope, user, github) {
         var self = this,
 
