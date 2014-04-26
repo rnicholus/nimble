@@ -1,4 +1,5 @@
-//TODO maybe allow conditional requests and the ability to clear cache for specific reqs
+// TODO maybe allow conditional requests and the ability to clear cache for specific reqs
+// TODO figure out how to determine if issues are not enabled
 nimbleModule.factory("github", ["token", "$http", "$q",
     function(token, $http, $q) {
 
