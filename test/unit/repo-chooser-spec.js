@@ -58,33 +58,4 @@ describe("Repo menu controller", function() {
             {type: "type2", repos: [{full_name: "nicholus"}, {full_name: "ray"}]}
         ]);
     });
-
-    it("responds to a repo name in the URL", function() {
-        var user = {
-            selectedRepoName: null
-        };
-
-        controller("repoChooserController", {
-            $scope: scope,
-            $modal: null,
-            user: user,
-            $location: location
-        });
-
-        location.path("/repos/foo/bar");
-        scope.$root.$digest();
-        expect(user.selectedRepoName).toEqual("foo/bar");
-
-        location.path("/path1/path2/path3");
-        scope.$root.$digest();
-        expect(user.selectedRepoName).toEqual("foo/bar");
-
-        location.path("/repos/organization");
-        scope.$root.$digest();
-        expect(user.selectedRepoName).toEqual("foo/bar");
-
-        location.path("/repos/organization/reponame");
-        scope.$root.$digest();
-        expect(user.selectedRepoName).toEqual("organization/reponame");
-    });
 });

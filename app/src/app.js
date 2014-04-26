@@ -4,4 +4,5 @@ var nimbleModule = angular.module("nimble", [
     "ngAnimate",
     "ajoslin.promise-tracker",
     "cgBusy"
-]);
+])
+    .run(["deepLinking", function(deepLinking) {}]);

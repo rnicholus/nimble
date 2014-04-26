@@ -1,3 +1,4 @@
+// TODO fix this to avoid minification issues
 var repoChooserInstanceController = function($scope, $modalInstance, repos, promiseTracker, systemAlert) {
     function sort(reposArray) {
         reposArray.sort(function(a, b) {
@@ -35,22 +36,8 @@ var repoChooserInstanceController = function($scope, $modalInstance, repos, prom
     ));
 };
 
-nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user", "$location",
-    function($scope, $modal, user, $location) {
-
-        $scope.$watch(function() {
-            return $location.path();
-        },
-        function(path) {
-            if (path.indexOf("/repos/") === 0) {
-                var repoSegment = path.substr(7);
-
-                if (repoSegment.split("/").length === 2) {
-                    user.selectedRepoName = repoSegment;
-                }
-            }
-        });
-
+nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user",
+    function($scope, $modal, user) {
         $scope.open = function() {
             var modalInstance = $modal.open({
                 controller: repoChooserInstanceController,
