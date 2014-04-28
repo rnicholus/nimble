@@ -15,11 +15,9 @@
             Change Repo
         </button>
     </li>
-    <li>
-        TODO column menu
-        <!--<button {{action open_modal "column_chooser"}}-->
-        <!--class="btn btn-link">-->
-        <!--Edit Columns-->
-        <!--</button>-->
+    <li ng-controller="setupColumnsController">
+        <button ng-click="open()" class="btn btn-link">
+            Edit Columns
+        </button>
     </li>
 </ul>
