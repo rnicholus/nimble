@@ -93,3 +93,7 @@ HEADER {
 .tab-pane {
     padding-top: 10px;
 }
+
+.sorting-dest {
+    opacity: .2;
+}
