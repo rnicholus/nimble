@@ -27,8 +27,8 @@ nimbleModule.controller("userController", ["$scope", "user",
         };
     })
 
-    .factory("user", ["github", "token", "$http", "$q",
-        function(github, token, $http, $q) {
+    .factory("user", ["github", "token", "$http", "$q", "$window",
+        function(github, token, $http, $q, $window) {
 
         var authUrl = "/github/token";
 
@@ -40,7 +40,7 @@ nimbleModule.controller("userController", ["$scope", "user",
             },
 
             login: function() {
-                window.location = authUrl;
+                $window.location.href = authUrl;
             },
 
             logout: function() {
