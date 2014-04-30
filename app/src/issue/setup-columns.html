@@ -4,21 +4,15 @@
 </div>
 <div class="modal-body">
     <div class="modal-body">
-        <ol id="column-list"
-            sortable-items handles-selector=".glyphicon-move" ghost-class="sorting-dest">
+        <ol id="column-list" ui-sortable ng-model="columns">
             <li ng-repeat="column in columns" class="list-input">
                 <input type="text" ng-value="column.name">
                 <i class="glyphicon glyphicon-move"></i>
-                <i class="delete glyphicon glyphicon-trash"></i>
+                <i ng-click="remove($index)" class="delete glyphicon glyphicon-trash"></i>
             </li>
         </ol>
 
-        <button class="btn btn-default" ng-click="add()">
-            More
-        </button>
-
-        <button class="btn btn-primary pull-right" ng-click="save()">
-            Done
-        </button>
+        <button class="btn btn-default" ng-click="add()">More</button>
+        <button class="btn btn-primary pull-right" ng-click="save()">Done</button>
     </div>
 </div>
