@@ -6,20 +6,28 @@ nimbleModule.factory("github", ["token", "$http", "$q",
     var apiRoot = "https://api.github.com",
         apiVersion = "application/vnd.github.v3+json",
 
-        callApi = function(path, _verb, _params) {
+        callApi = function(path, _verb, _data) {
             var deferred = $q.defer(),
-                verb = _verb || "get",
-                params = _params || {};
+                verb = _verb || "GET",
+                data = _data || {},
+                params = {
+                    access_token: token.get()
+                };
 
-            params.access_token = token.get();
-            params.per_page = 100;
+            if (verb === "GET") {
+                params.per_page = 100;
+            }
 
-            $http[verb](apiRoot + "/" + path, {
+            $http({
+                method: verb,
+                url: apiRoot + "/" + path,
                 cache: true,
                 headers: {
-                    Accept: apiVersion
+                    Accept: apiVersion,
+                    "Content-Type": "application/json;charset=utf-8"
                 },
-                params: params
+                params: params,
+                data: data
             })
                 .success(function(data, status, headers) {
                     // grab all pages if more than one page of results exists
@@ -82,6 +90,24 @@ nimbleModule.factory("github", ["token", "$http", "$q",
 
 
     return {
+        createLabel: function(fullRepoName, labelToCreate) {
+            return callApi("repos/" + fullRepoName + "/labels",
+                "POST",
+                {
+                    name: labelToCreate,
+                    color: "FFFFFF"
+                }
+            );
+        },
+
+        deleteLabel: function(fullRepoName, labelToDelete) {
+            return callApi("repos/" + fullRepoName + "/labels/" + labelToDelete, "DELETE");
+        },
+
+        getAuthenticatedUser: function() {
+            return callApi("user");
+        },
+
         listAllLabels: function(fullRepoName) {
             return callApi("repos/" + fullRepoName + "/labels");
         },
@@ -98,8 +124,14 @@ nimbleModule.factory("github", ["token", "$http", "$q",
             return callApi("user/repos");
         },
 
-        getAuthenticatedUser: function() {
-            return callApi("user");
+        updateLabel: function(fullRepoName, labelDiff) {
+            return callApi("repos/" + fullRepoName + "/labels/" + labelDiff.oldLabel,
+                "PATCH",
+                {
+                    name: labelDiff.newLabel,
+                    color: "FFFFFF"
+                }
+            );
         }
     };
 }]);
