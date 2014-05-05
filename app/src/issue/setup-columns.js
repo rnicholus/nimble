@@ -12,10 +12,14 @@ var setupColumnsInstanceController = ["$scope", "$modalInstance", "columns",
             // in the UI (before save), we must use a deep copy instead.
             columns: angular.copy(columns.current),
 
-            ok: $modalInstance.close,
-
             remove: function(columnIndex) {
                 $scope.columns.splice(columnIndex, 1);
+            },
+
+            // TODO show alert on failure
+            save: function() {
+                columns.update($scope.columns);
+                $modalInstance.close();
             }
         });
     }];

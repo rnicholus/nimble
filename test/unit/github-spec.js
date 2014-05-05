@@ -104,4 +104,38 @@ describe("Github API service", function() {
 
         httpBackend.flush();
     });
+
+    it("creates a label correctly", function() {
+        httpBackend.expectPOST(githubApiUrl + "/repos/garstasio/foobar/labels?access_token=test", {
+            name: "0 - testcolumn",
+            color: "FFFFFF"
+        }).respond(200);
+
+        githubService.createLabel("garstasio/foobar", "0 - testcolumn");
+
+        httpBackend.flush();
+    });
+
+    it("deletes a label correctly", function() {
+        httpBackend.expectDELETE(githubApiUrl + "/repos/garstasio/foobar/labels/0-testcolumn?access_token=test")
+            .respond(200);
+
+        githubService.deleteLabel("garstasio/foobar", "0-testcolumn");
+
+        httpBackend.flush();
+    });
+
+    it("updates a label correctly", function() {
+        httpBackend.expect("PATCH", githubApiUrl + "/repos/garstasio/foobar/labels/0-testcolumn?access_token=test", {
+            name: "1 - testcolumn",
+            color: "FFFFFF"
+        }).respond(200);
+
+        githubService.updateLabel("garstasio/foobar", {
+            oldLabel: "0-testcolumn",
+            newLabel: "1 - testcolumn"
+        });
+
+        httpBackend.flush();
+    });
 });
