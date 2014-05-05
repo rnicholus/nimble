@@ -6,7 +6,7 @@
     <div class="modal-body">
         <ol id="column-list" ui-sortable ng-model="columns">
             <li ng-repeat="column in columns" class="list-input">
-                <input type="text" ng-value="column.name">
+                <input type="text" ng-model="column.name">
                 <i class="glyphicon glyphicon-move"></i>
                 <i ng-click="remove($index)" class="delete glyphicon glyphicon-trash"></i>
             </li>
