@@ -3,6 +3,7 @@ nimble
 
 Github issues, the way it should be
 
+[![Build Status](https://travis-ci.org/rnicholus/nimble.svg?branch=master)](https://travis-ci.org/rnicholus/nimble)
 
 #### UPDATE: Work to switch the existing Ember code to Angular is being staged in the [angular branch][angular].  See [issue #7][7] for details.
 
