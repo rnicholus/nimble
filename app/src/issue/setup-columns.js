@@ -1,5 +1,5 @@
-var setupColumnsInstanceController = ["$scope", "$modalInstance", "columns",
-    function($scope, $modalInstance, columns) {
+var setupColumnsInstanceController = ["$scope", "$modalInstance", "columns", "systemAlert",
+    function($scope, $modalInstance, columns, systemAlert) {
         angular.extend($scope, {
             add: function() {
                 $scope.columns.push({name: null});
@@ -16,10 +16,16 @@ var setupColumnsInstanceController = ["$scope", "$modalInstance", "columns",
                 $scope.columns.splice(columnIndex, 1);
             },
 
-            // TODO show alert on failure
             save: function() {
-                columns.update($scope.columns);
-                $modalInstance.close();
+                columns.update($scope.columns).then(
+                    function updated() {
+                        $modalInstance.close();
+                    },
+
+                    function failure() {
+                        systemAlert.show("error", "Problem updating columns on GitHub.");
+                    }
+                );
             }
         });
     }];
@@ -27,12 +33,9 @@ var setupColumnsInstanceController = ["$scope", "$modalInstance", "columns",
 nimbleModule.controller("setupColumnsController", ["$scope", "$modal",
     function($scope, $modal) {
         $scope.open = function() {
-            var modalInstance = $modal.open({
+            $modal.open({
                 controller: setupColumnsInstanceController,
                 templateUrl: "src/issue/setup-columns.html"
             });
-
-            // TODO
-            modalInstance.result.then(function(newRepo) {});
         };
     }]);

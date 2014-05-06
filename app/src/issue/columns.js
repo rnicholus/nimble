@@ -85,11 +85,11 @@ nimbleModule.controller("columnsController", ["$scope", "columns",
                             }
                         }
                     }());
-
-                    this.current = proposedLabels;
                 }
 
-                return $q.all(promises);
+                return $q.all(promises).then(function() {
+                    self.current = proposedLabels;
+                });
             }
         });
 
