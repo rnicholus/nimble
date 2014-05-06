@@ -3,3 +3,4 @@ github_oauth_data.json
 .idea
 dist
 *.iml
+.codio
