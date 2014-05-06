@@ -1,14 +1,8 @@
 nimbleModule.controller("repoMenuController", ["$scope", "user",
     function($scope, user) {
-        $scope.$watch(function() {return user.selectedRepoName;},
-            function(selectedRepoName) {
-                $scope.name = selectedRepoName;
-            }
-        );
+        $scope.getName = function() {
+            return user.selectedRepoName;
+        };
 
-        $scope.$watch(function() {return user.isLoggedIn();},
-            function(loggedIn) {
-                $scope.loggedIn = loggedIn;
-            }
-        );
+        $scope.isLoggedIn = user.isLoggedIn;
     }]);

@@ -21,13 +21,13 @@ describe("Repo menu controller", function() {
         });
 
         this.$rootScope.$digest();
-        expect(this.$scope.name).toEqual(this.user.selectedRepoName);
-        expect(this.$scope.loggedIn).toBe(true);
+        expect(this.$scope.getName()).toEqual(this.user.selectedRepoName);
+        expect(this.$scope.isLoggedIn()).toBe(true);
 
         this.user.selectedRepoName.and.returnValue("changed");
         this.user.isLoggedIn.and.returnValue(false);
         this.$rootScope.$digest();
-        expect(this.$scope.name).toEqual(this.user.selectedRepoName);
-        expect(this.$scope.loggedIn).toBe(false);
+        expect(this.$scope.getName()).toEqual(this.user.selectedRepoName);
+        expect(this.$scope.isLoggedIn()).toBe(false);
     });
 });

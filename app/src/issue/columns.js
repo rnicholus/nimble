@@ -1,11 +1,8 @@
 nimbleModule.controller("columnsController", ["$scope", "columns",
     function($scope, columns) {
-
-        $scope.$watch(function() {return columns.current;},
-            function(currentColumns) {
-                $scope.columns = currentColumns;
-            }
-        );
+        $scope.getColumns = function() {
+            return columns.current;
+        };
     }])
     .factory("columns", ["$rootScope", "user", "github", "$q",
         function($rootScope, user, github, $q) {
@@ -106,6 +103,14 @@ nimbleModule.controller("columnsController", ["$scope", "columns",
 
                         self.current = formattedLabels(columnLabels);
                     });
+                }
+            }
+        );
+
+        $rootScope.$watch(function() {return user.isLoggedIn();},
+            function(loggedIn) {
+                if (!loggedIn) {
+                    self.current = null;
                 }
             }
         );

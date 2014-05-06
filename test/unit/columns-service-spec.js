@@ -12,6 +12,13 @@ describe("Columns service", function() {
         });
     });
 
+    it("should clear out columns if the user logs out", function() {
+        this.columns.current = [];
+        spyOn(this.user, "isLoggedIn").and.returnValue(false);
+        this.$rootScope.$digest();
+        expect(this.columns.current).toBe(null);
+    });
+
     it("should start out with no current columns, then update with formatted columns when a repo has been selected", function() {
         var listAllLabelsDeferred = this.$q.defer(),
             allLabels = [
