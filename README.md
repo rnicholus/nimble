@@ -9,7 +9,7 @@ This project will (hopefully, if I stick with it & don't get sidetracked) be an 
 
 Planning documents will be maintained (at least initially) in the [wiki][wiki].  Actionable items will ultimately be backed by [issues][issues], ironically.
 
-The code for this project will be AGPL licensed.  Please see the [LICENSE file][license] for the leaglese.  
+The code for this project will be MIT licensed.  Please see the [LICENSE file][license] for the leaglese.
 
 
 [api]: http://developer.github.com/v3/issues/
