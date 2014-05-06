@@ -58,11 +58,15 @@ describe("Columns service", function() {
                 {name: "2", label: "0 - 2"}
             ];
 
-            this.columns.update(angular.copy(this.columns.current)).then(function(results) {
-                expect(results.length).toBe(0);
-            });
+            spyOn(this.github, "updateLabel").and.returnValue(this.$q.defer().promise);
+            spyOn(this.github, "createLabel").and.returnValue(this.$q.defer().promise);
+            spyOn(this.github, "deleteLabel").and.returnValue(this.$q.defer().promise);
 
-            this.$rootScope.$digest();
+            this.columns.update(angular.copy(this.columns.current));
+
+            expect(this.github.deleteLabel).not.toHaveBeenCalled();
+            expect(this.github.createLabel).not.toHaveBeenCalled();
+            expect(this.github.updateLabel).not.toHaveBeenCalled();
         });
 
         it("handles new & changed columns correctly", function() {
@@ -86,6 +90,7 @@ describe("Columns service", function() {
             ];
 
             this.user.selectedRepoName = "garstasio/foobar";
+            spyOn(this.github, "listAllLabels").and.returnValue(this.$q.defer().promise);
             spyOn(this.github, "updateLabel").and.returnValue(this.$q.defer().promise);
             spyOn(this.github, "createLabel").and.returnValue(this.$q.defer().promise);
 
@@ -107,9 +112,6 @@ describe("Columns service", function() {
 
             // adds
             expect(this.github.createLabel).toHaveBeenCalledWith("garstasio/foobar", "3 - foo");
-
-            // new columns
-            expect(this.columns.current).toEqual(expectedColumns);
         });
 
         it("handles new & deleted columns correctly", function() {
@@ -129,6 +131,7 @@ describe("Columns service", function() {
             ];
 
             this.user.selectedRepoName = "garstasio/foobar";
+            spyOn(this.github, "listAllLabels").and.returnValue(this.$q.defer().promise);
             spyOn(this.github, "updateLabel").and.returnValue(this.$q.defer().promise);
             spyOn(this.github, "deleteLabel").and.returnValue(this.$q.defer().promise);
 
@@ -146,9 +149,6 @@ describe("Columns service", function() {
 
             // deletes
             expect(this.github.deleteLabel).toHaveBeenCalledWith("garstasio/foobar", "2 - 3");
-
-            // new columns
-            expect(this.columns.current).toEqual(expectedColumns);
         });
     });
 });
