@@ -10,7 +10,19 @@ var setupColumnsInstanceController = ["$scope", "$modalInstance", "columns", "sy
             // To prevent any changes from being persisted to the
             // service-held current columns array when we modify it
             // in the UI (before save), we must use a deep copy instead.
-            columns: angular.copy(columns.current),
+            columns: (function() {
+                var currentColumns = angular.copy(columns.current);
+
+                if (!currentColumns || !currentColumns.length) {
+                    currentColumns = [
+                        {name: null},
+                        {name: null},
+                        {name: null}
+                    ];
+                }
+
+                return currentColumns;
+            }()),
 
             remove: function(columnIndex) {
                 $scope.columns.splice(columnIndex, 1);
@@ -30,12 +42,23 @@ var setupColumnsInstanceController = ["$scope", "$modalInstance", "columns", "sy
         });
     }];
 
-nimbleModule.controller("setupColumnsController", ["$scope", "$modal",
-    function($scope, $modal) {
+nimbleModule.controller("setupColumnsController", ["$scope", "$modal", "user", "columns",
+    function($scope, $modal, user, columns) {
         $scope.open = function() {
             $modal.open({
                 controller: setupColumnsInstanceController,
                 templateUrl: "src/issue/setup-columns.html"
             });
         };
+
+        // Display column setup modal if no columns exist for this repo
+        $scope.$watch(function() {return columns.current;},
+            function(currentColumns) {
+                if ((currentColumns && !currentColumns.examined) &&
+                    (!currentColumns || !currentColumns.length)) {
+
+                    columns.current.examined = true;
+                    $scope.open();
+                }
+            });
     }]);

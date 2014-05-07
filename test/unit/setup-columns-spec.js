@@ -3,11 +3,12 @@ describe("Setup columns controller", function() {
         var self = this;
 
         module("nimble");
-        inject(function($rootScope, $controller, columns) {
+        inject(function($rootScope, $controller, columns, user) {
             self.$scope = $rootScope.$new();
             self.$controller = $controller;
             self.$modalInstance = jasmine.createSpyObj("modalInstance", ["close", "dismiss"]);
             self.columns = columns;
+            self.user = user;
         });
 
         this.columns.current = [
@@ -60,5 +61,24 @@ describe("Setup columns controller", function() {
             {name: "three"},
             {name: null}
         ]);
+    });
+
+    it("ensures the user is prompted to setup columns if the repo has no columns", function() {
+        this.$controller("setupColumnsController", {
+            $scope: this.$scope,
+            $modal: this.$modal,
+            user: this.user,
+            columns: this.columns
+        });
+
+        this.$scope.open = function() {};
+        spyOn(this.$scope, "open");
+
+        this.$scope.$root.$digest();
+        expect(this.$scope.open).not.toHaveBeenCalled();
+
+        this.columns.current = [];
+        this.$scope.$root.$digest();
+        expect(this.$scope.open).toHaveBeenCalled();
     });
 });
