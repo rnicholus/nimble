@@ -1,6 +1,6 @@
 {
     "description": "Project management using Github issues",
-    "depdendencies": {
+    "dependencies": {
         "express": "4.x",
         "node-uuid": "1.4.1",
         "node-promise": "0.5.10",
