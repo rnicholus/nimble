@@ -19,7 +19,8 @@ describe("Repo menu controller", function() {
                 open: function() {}
             },
             user = {
-                selectedRepoName: "initial"
+                selectedRepoName: "initial",
+                isLoggedIn: function() {return true;}
             };
 
         controller("repoChooserController", {
@@ -57,5 +58,25 @@ describe("Repo menu controller", function() {
             {type: "type1", repos: [{full_name: "a"}, {full_name: "b"}, {full_name: "c"}]},
             {type: "type2", repos: [{full_name: "nicholus"}, {full_name: "ray"}]}
         ]);
+    });
+
+    it("opens the select repo modal when logging in if a repo has not yet been selected", function() {
+        var user = {
+                isLoggedIn: function() {return false;}
+            };
+
+        controller("repoChooserController", {
+            $scope: scope,
+            user: user
+        });
+
+        spyOn(scope, "open");
+
+        scope.$root.$digest();
+        expect(scope.open).not.toHaveBeenCalled();
+
+        spyOn(user, "isLoggedIn").and.returnValue(true);
+        scope.$root.$digest();
+        expect(scope.open).toHaveBeenCalled();
     });
 });

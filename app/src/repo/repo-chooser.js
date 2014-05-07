@@ -49,4 +49,11 @@ nimbleModule.controller("repoChooserController", ["$scope", "$modal", "user",
                 user.selectedRepoName = newRepo.full_name;
             });
         };
+
+        $scope.$watch(function() {return user.isLoggedIn();},
+            function(loggedIn) {
+                if (loggedIn && !user.selectedRepoName) {
+                    $scope.open();
+                }
+            });
     }]);
