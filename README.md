@@ -3,7 +3,7 @@ nimble
 
 Github issues, the way it should be
 
-[![Build Status](https://travis-ci.org/garstasio/nimble.svg?branch=master)](https://travis-ci.org/rnicholus/nimble)
+[![Build Status](https://travis-ci.org/garstasio/nimble.svg?branch=master)](https://travis-ci.org/garstasio/nimble)
 [![Dependency Status](https://david-dm.org/garstasio/nimble.svg?theme=shields.io)](https://david-dm.org/rnicholus/nimble)
 [![devDependency Status](https://david-dm.org/garstasio/nimble/dev-status.svg?theme=shields.io)](https://david-dm.org/rnicholus/nimble#info=devDependencies)
 
